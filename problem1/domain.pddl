@@ -45,6 +45,8 @@
     (is_valve ?s - supply) ; supply ?s is a valve
     (is_bolt ?s - supply) ; supply ?s is a bolt
     (is_tool ?s - supply) ; supply ?s is a tool
+
+    (debug ?l - supply)
   )
 
   ;; moves a robot between two connected locations
@@ -57,6 +59,15 @@
       (not (ral ?r ?from))
     )
   )
+
+  ;; loads an empty robot with a box
+  (:action load_robot
+    :parameters (?r - robot ?l - location ?b - box)
+    :precondition (and (ral ?r ?l) (not (rloaded ?r)) (bal ?b ?l))
+    :effect (and (rloaded ?r) (bor ?b ?r) (not (bal ?b ?l)))
+  )
+
+  ;; ======================================================================
 
   ;; moves a robot between two connected locations
   (:action move_box
@@ -71,12 +82,6 @@
       (not (bal ?b ?from))
       (bal ?b ?to)
     )
-  )
-  ;; loads an empty robot with a box
-  (:action load_robot
-    :parameters (?r - robot ?l - location ?b - box)
-    :precondition (and (ral ?r ?l) (not (rloaded ?r)) (bal ?b ?l))
-    :effect (and (rloaded ?r) (bor ?b ?r))
   )
 
   ;; unloads the box from a robot
