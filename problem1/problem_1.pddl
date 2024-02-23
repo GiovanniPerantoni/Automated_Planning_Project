@@ -48,18 +48,23 @@
       (is_bolt bo2)
       (is_tool t1)
       (is_tool t2)
+
+      ;; DEBUG FLAGS
+      (always_true r1)
     )
   
     (:goal
       (and
-        ; (ral r1 lwh)
-        ; (has_valve ws1)
-        ; (has_bolt ws1)
-        ; (has_tool ws1)
-        ; (has_valve ws2)
-        ; (has_bolt ws3)
-        ; (has_tool ws3)
-        (bal b1 l2)
+        (ral r1 lwh)
+        (has_valve ws1)
+        (has_bolt ws1)
+        (has_tool ws1)
+        (has_valve ws2)
+        (has_bolt ws3)
+        (has_tool ws3)
+
+        ; (debug r1)
+        
       )
     )
 )

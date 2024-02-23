@@ -19,18 +19,15 @@
 
     ;; locations
     (connected ?l1 ?l2 - location) ; location ?l1 is connected to location ?l2
-    ; (whal ?w - warehouse ?l - location)       ; warehouse ?w is in location ?l
 
     ;; boxes
     (bal ?b - box ?l - location) ; box ?b is in the location ?l
-    ; (baw ?b - box ?w - workstation) ; box ?b is in workstation ?w
     (bor ?b - box ?r - robot) ; box ?b on robot ?r
     (bempty ?b - box) ; box ?b is empty
     (sib ?s - supply ?b - box) ; supply ?s is in box ?b
 
     ;; robots
     (ral ?r - robot ?l - location) ; robot ?r is at location ?l
-    ; (rawh ?r - robot ?wa - warehouse)    ; robot ?r is at warehouse ?wa
     (rloaded ?r - robot) ; robot ?r has a boxe
 
     ;; workstations
@@ -46,7 +43,9 @@
     (is_bolt ?s - supply) ; supply ?s is a bolt
     (is_tool ?s - supply) ; supply ?s is a tool
 
-    (debug ?l - supply)
+    ;; DEBUG
+    (debug ?r - robot)
+    (always_true ?r - robot)
   )
 
   ;; moves a robot between two connected locations
@@ -67,15 +66,12 @@
     :effect (and (rloaded ?r) (bor ?b ?r) (not (bal ?b ?l)))
   )
 
-  ;; ======================================================================
-
   ;; moves a robot between two connected locations
   (:action move_box
     :parameters (?r - robot ?b - box ?from ?to - location)
     :precondition (and (connected ?from ?to)
       (ral ?r ?from)
-      (bal ?b ?from)
-      (bor ?r ?b)
+      (bor ?b ?r)
     )
     :effect (and (ral ?r ?to)
       (not (ral ?r ?from))
@@ -87,23 +83,26 @@
   ;; unloads the box from a robot
   (:action unload_robot
     :parameters (?r - robot ?b - box)
-    :precondition (and (not (rloaded ?r)) (bor ?b ?r))
-    :effect (and (not (rloaded ?r)) (not (bor ?b ?r)))
+    :precondition (and 
+      (rloaded ?r) 
+      (bor ?b ?r)
+    )
+    :effect (and 
+      (not (rloaded ?r)) 
+      (not (bor ?b ?r))
+    )
   )
 
-  ;; loads an empty robot with a box
+  ;; ======================================================================
+
+  ;; loads an empty box with a supply
   (:action load_supply
     :parameters (?r - robot ?l - location ?b - box ?s - supply)
     :precondition (and (ral ?r ?l) (bal ?b ?l) (sal ?s ?l) (bempty ?b))
     :effect (and (sib ?s ?b) (not (bempty ?b)) (not (sal ?s ?l)))
   )
 
-  ;; unloads the box from a robot
-  ; (:action unload_supply
-  ;   :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
-  ;   :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l))
-  ;   :effect (and (not (rloaded ?r)) (not (bor ?b ?r)) (bempty ?b) (sal ?s ?l) (wcontains ?w ?s))
-  ; )
+  ;; unloads the content of a box to a given workstation
   (:action unload_supply
     :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
     :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l))
