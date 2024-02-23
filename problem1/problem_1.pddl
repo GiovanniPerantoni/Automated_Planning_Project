@@ -41,6 +41,13 @@
       (sal bo2 lwh)
       (sal t1 lwh)
       (sal t2 lwh) 
+      ; supply type
+      (is_valve v1)
+      (is_valve v2)
+      (is_bolt bo1)
+      (is_bolt bo2)
+      (is_tool t1)
+      (is_tool t2)
     )
   
     (:goal

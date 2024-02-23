@@ -1,5 +1,5 @@
 (define (domain industial_planning_1)
-  (:requirements :strips :typing :negative-preconditions)
+  (:requirements :strips :typing :negative-preconditions :conditional-effects)
 
   (:types
     location - object ; can contain workstations robots and boxes
@@ -29,19 +29,22 @@
     (sib ?s - supply ?b - box) ; supply ?s is in box ?b
 
     ;; robots
-    (ral ?r - robot ?l - location)            ; robot ?r is at location ?l
+    (ral ?r - robot ?l - location) ; robot ?r is at location ?l
     ; (rawh ?r - robot ?wa - warehouse)    ; robot ?r is at warehouse ?wa
-    (rloaded ?r - robot)                      ; robot ?r has a boxe
+    (rloaded ?r - robot) ; robot ?r has a boxe
 
     ;; workstations
-    (wal ?w - workstation ?l - location)      ; workstation ?w is at location ?l
-    (wcontains ?w - workstation ?s - supply)  ; workstation ?w contains supply ?s
-    (has_valve ?w - workstation)              ; workstation ?w has a valve
-    (has_bolt ?w - workstation)               ; workstation ?w has a bolt
-    (has_tool ?w - workstation)               ; workstation ?w has a tool 
+    (wal ?w - workstation ?l - location) ; workstation ?w is at location ?l
+    (wcontains ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
+    (has_valve ?w - workstation) ; workstation ?w has a valve
+    (has_bolt ?w - workstation) ; workstation ?w has a bolt
+    (has_tool ?w - workstation) ; workstation ?w has a tool 
 
     ;; supplies
     (sal ?s - supply ?l - location) ; supply ?s is at location ?l
+    (is_valve ?s - supply) ; supply ?s is a valve
+    (is_bolt ?s - supply) ; supply ?s is a bolt
+    (is_tool ?s - supply) ; supply ?s is a tool
   )
 
   ;; moves a robot between two connected locations
@@ -91,9 +94,24 @@
   )
 
   ;; unloads the box from a robot
+  ; (:action unload_supply
+  ;   :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
+  ;   :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l))
+  ;   :effect (and (not (rloaded ?r)) (not (bor ?b ?r)) (bempty ?b) (sal ?s ?l) (wcontains ?w ?s))
+  ; )
   (:action unload_supply
     :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
     :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l))
-    :effect (and (not (rloaded ?r)) (not (bor ?b ?r)) (bempty ?b) (sal ?s ?l) (wcontains ?w ?s))
+    :effect (and (not (rloaded ?r)) (not (bor ?b ?r)) (bempty ?b) (sal ?s ?l) (wcontains ?w ?s)
+      (when
+        (is_valve ?s)
+        (has_valve ?w))
+      (when
+        (is_bolt ?s)
+        (has_bolt ?w))
+      (when
+        (is_tool ?s)
+        (has_tool ?w))
+      )
   )
 )

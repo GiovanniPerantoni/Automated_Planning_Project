@@ -1,5 +1,5 @@
 (define (domain dock-worker-robot-pos)
- (:requirements :strips :typing )
+ (:requirements :strips :typing :conditional-effects)
  (:types
   location      ; * there are several connected locations in the harbor
   pile          ; * is attached to a location, it holds a pallet and a
