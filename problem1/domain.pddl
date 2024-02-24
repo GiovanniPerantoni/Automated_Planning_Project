@@ -36,7 +36,7 @@
     (has_valve ?w - workstation) ; workstation ?w has a valve
     (has_bolt ?w - workstation) ; workstation ?w has a bolt
     (has_tool ?w - workstation) ; workstation ?w has a tool 
-
+    (supply_available ?s - supply) ; supply ?s is available
     ;; supplies
     (sal ?s - supply ?l - location) ; supply ?s is at location ?l
     (is_valve ?s - supply) ; supply ?s is a valve
@@ -52,7 +52,7 @@
   (:action move
     :parameters (?r - robot ?from ?to - location)
     :precondition (and (connected ?from ?to)
-      (ral ?r ?from)
+      (ral ?r ?from) (not (rloaded ?r))
     )
     :effect (and (ral ?r ?to)
       (not (ral ?r ?from))
@@ -61,7 +61,7 @@
 
   ;; loads an empty robot with a box
   (:action load_robot
-    :parameters (?r - robot ?l - location ?b - box)
+    :parameters (?r - robot ?b - box ?l - location)
     :precondition (and (ral ?r ?l) (not (rloaded ?r)) (bal ?b ?l))
     :effect (and (rloaded ?r) (bor ?b ?r) (not (bal ?b ?l)))
   )
@@ -83,12 +83,12 @@
   ;; unloads the box from a robot
   (:action unload_robot
     :parameters (?r - robot ?b - box)
-    :precondition (and 
-      (rloaded ?r) 
+    :precondition (and
+      (rloaded ?r)
       (bor ?b ?r)
     )
-    :effect (and 
-      (not (rloaded ?r)) 
+    :effect (and
+      (not (rloaded ?r))
       (not (bor ?b ?r))
     )
   )
@@ -98,15 +98,15 @@
   ;; loads an empty box with a supply
   (:action load_supply
     :parameters (?r - robot ?l - location ?b - box ?s - supply)
-    :precondition (and (ral ?r ?l) (bal ?b ?l) (sal ?s ?l) (bempty ?b))
+    :precondition (and (ral ?r ?l) (bal ?b ?l) (sal ?s ?l) (bempty ?b) (supply_available ?s))
     :effect (and (sib ?s ?b) (not (bempty ?b)) (not (sal ?s ?l)))
   )
 
   ;; unloads the content of a box to a given workstation
   (:action unload_supply
     :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
-    :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l))
-    :effect (and (not (rloaded ?r)) (not (bor ?b ?r)) (bempty ?b) (sal ?s ?l) (wcontains ?w ?s)
+    :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l) (not (bempty ?b)))
+    :effect (and (bempty ?b) (sal ?s ?l) (wcontains ?w ?s) (not (sib ?s ?b)) (not (supply_available ?s))
       (when
         (is_valve ?s)
         (has_valve ?w))
@@ -116,6 +116,6 @@
       (when
         (is_tool ?s)
         (has_tool ?w))
-      )
+    )
   )
 )
