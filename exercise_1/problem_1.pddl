@@ -10,6 +10,8 @@
     valve1 valve2 - valve
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
+    space1 space2 space3 - object
+    occupied1 occupied2 occupied3 - object
   )
 
   (:init

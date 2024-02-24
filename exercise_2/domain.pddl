@@ -1,4 +1,4 @@
-(define (domain industial_planning_1)
+(define (domain industial_planning_2)
   (:requirements :strips :typing :negative-preconditions :conditional-effects)
 
   (:types
@@ -11,6 +11,9 @@
     valve - supply ; type of supply
     bolt - supply ; type of supply
     tool - supply ; type of supply
+
+    carrier - location
+    ;; space - object
     )
 
   ;(:constants)
@@ -22,13 +25,14 @@
 
     ;; boxes
     (bal ?b - box ?l - location) ; box ?b is in the location ?l
-    (bor ?b - box ?r - robot) ; box ?b on robot ?r
+    ; (boc ?b - box ?c - carrier) ; box ?b on robot ?r
     (bempty ?b - box) ; box ?b is empty
     (sib ?s - supply ?b - box) ; supply ?s is in box ?b
 
     ;; robots
     (ral ?r - robot ?l - location) ; robot ?r is at location ?l
     (rloaded ?r - robot) ; robot ?r has a boxe
+    (rhc ?r - robot ?c - carrier) ; robot ?r has carrier ?c
 
     ;; workstations
     (wal ?w - workstation ?l - location) ; workstation ?w is at location ?l
@@ -43,53 +47,52 @@
     (is_bolt ?s - supply) ; supply ?s is a bolt
     (is_tool ?s - supply) ; supply ?s is a tool
 
-    ;; DEBUG
-    (debug ?r - robot)
-    (always_true ?r - robot)
+    ; (has_space ?r - robot ?s - space)
+    ; (is_free ?s - space)
   )
 
-  ;; moves a robot between two connected locations
-  (:action move
-    :parameters (?r - robot ?from ?to - location)
-    :precondition (and (connected ?from ?to)
-      (ral ?r ?from) (not (rloaded ?r))
-    )
-    :effect (and (ral ?r ?to)
-      (not (ral ?r ?from))
-    )
-  )
-
-  ;; loads an empty robot with a box
-  (:action load_robot
-    :parameters (?r - robot ?b - box ?l - location)
-    :precondition (and (ral ?r ?l) (not (rloaded ?r)) (bal ?b ?l))
-    :effect (and (rloaded ?r) (bor ?b ?r) (not (bal ?b ?l)))
-  )
-
-  ;; moves a robot between two connected locations
-  (:action move_box
-    :parameters (?r - robot ?b - box ?from ?to - location)
-    :precondition (and (connected ?from ?to)
+  ;; moves a robot with its carrier to a new location
+  (:action move_carrier
+    :parameters (?r - robot ?c - carrier ?from ?to - location)
+    :precondition (and
+      (connected ?from ?to)
       (ral ?r ?from)
-      (bor ?b ?r)
+      (rhc ?r ?c)
     )
-    :effect (and (ral ?r ?to)
+    :effect (and
       (not (ral ?r ?from))
-      (not (bal ?b ?from))
-      (bal ?b ?to)
+      (ral ?r ?to)
     )
   )
 
-  ;; unloads the box from a robot
-  (:action unload_robot
-    :parameters (?r - robot ?b - box)
+  ;; loads the carrier of a robot with a box
+  (:action load_carrier
+    :parameters (?r - robot ?b - box ?c - carrier ?l - location)
+    :precondition (and
+      (ral ?r ?l) 
+      (bal ?b ?l) 
+      (rhc ?r ?c)
+      (not (rloaded ?r))
+    )
+    :effect (and 
+      (not (bal ?b ?l)) 
+      (bal ?b ?c) 
+      (rloaded ?r)
+    )
+  ) 
+
+  ;; unloads the carrier of a robot with a box
+  (:action unload_carrier
+    :parameters (?r - robot ?b - box ?c - carrier ?l - location)
     :precondition (and
       (rloaded ?r)
-      (bor ?b ?r)
+      (ral ?r ?l)
+      (bal ?b ?c)
     )
     :effect (and
       (not (rloaded ?r))
-      (not (bor ?b ?r))
+      (bal ?b ?l)
+      (not (bal ?b ?c))
     )
   )
 

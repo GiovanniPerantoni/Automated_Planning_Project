@@ -2,7 +2,7 @@
   (:domain industial_planning_2)
 
   (:objects
-    robot1 - robot
+    robot1 robot2 robot3 - robot
     warehouse_loc location1 location2 - location
     workstation1 workstation2 workstation3 - workstation
     warehouse1 - warehouse
@@ -10,7 +10,7 @@
     valve1 valve2 - valve
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
-    carrier1 - carrier
+    carrier1 carrier2 carrier3 - carrier
   )
 
   (:init
@@ -31,8 +31,12 @@
     (bempty box3)
     ; robot location
     (ral robot1 warehouse_loc)
+    (ral robot2 warehouse_loc)
+    (ral robot3 warehouse_loc)
     ; carrier owner
     (rhc robot1 carrier1)
+    (rhc robot2 carrier2)
+    (rhc robot3 carrier3)
     ; workstations location
     (wal workstation1 location1)
     (wal workstation2 location1)
@@ -62,8 +66,12 @@
 
   (:goal
     (and
-      (bal box1 location1)
-      (bal box2 location2)
+      (ral robot1 warehouse_loc)
+      (ral robot2 warehouse_loc)
+      (ral robot3 warehouse_loc)
+      (has_valve workstation1)
+      (has_tool workstation2)
+      (has_bolt workstation1)
     )
   )
 )
