@@ -1,4 +1,4 @@
-(define (problem ass1)
+(define (problem problem1_1)
   (:domain industial_planning_1)
 
   (:objects
