@@ -13,25 +13,23 @@
     tool - supply ; type of supply
 
     carrier - location
-    ;; space - object
-    )
+    space - object
+  )
 
   ;(:constants)
 
   (:predicates
-
     ;; locations
     (connected ?l1 ?l2 - location) ; location ?l1 is connected to location ?l2
 
     ;; boxes
     (bal ?b - box ?l - location) ; box ?b is in the location ?l
-    ; (boc ?b - box ?c - carrier) ; box ?b on robot ?r
     (bempty ?b - box) ; box ?b is empty
     (sib ?s - supply ?b - box) ; supply ?s is in box ?b
 
     ;; robots
     (ral ?r - robot ?l - location) ; robot ?r is at location ?l
-    (rloaded ?r - robot) ; robot ?r has a boxe
+    ; (rloaded ?r - robot) ; robot ?r has a boxe
     (rhc ?r - robot ?c - carrier) ; robot ?r has carrier ?c
 
     ;; workstations
@@ -41,14 +39,16 @@
     (has_bolt ?w - workstation) ; workstation ?w has a bolt
     (has_tool ?w - workstation) ; workstation ?w has a tool 
     (supply_available ?s - supply) ; supply ?s is available
+
     ;; supplies
     (sal ?s - supply ?l - location) ; supply ?s is at location ?l
     (is_valve ?s - supply) ; supply ?s is a valve
     (is_bolt ?s - supply) ; supply ?s is a bolt
     (is_tool ?s - supply) ; supply ?s is a tool
 
-    ; (has_space ?r - robot ?s - space)
-    ; (is_free ?s - space)
+    ;; carrier space
+    (free ?c - carrier ?s - space) ; space ?s is not used carrier ?c
+    (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
   )
 
   ;; moves a robot with its carrier to a new location
@@ -67,33 +67,36 @@
 
   ;; loads the carrier of a robot with a box
   (:action load_carrier
-    :parameters (?r - robot ?b - box ?c - carrier ?l - location)
+    :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
     :precondition (and
-      (ral ?r ?l) 
-      (bal ?b ?l) 
+      (ral ?r ?l)
+      (bal ?b ?l)
       (rhc ?r ?c)
-      (not (rloaded ?r))
+      (free ?c ?s)
     )
-    :effect (and 
-      (not (bal ?b ?l)) 
-      (bal ?b ?c) 
-      (rloaded ?r)
+    :effect (and
+      (not (bal ?b ?l))
+      (bal ?b ?c)
+      (not (free ?c ?s))
+      (occupied ?c ?s)
     )
-  ) 
+  )
 
   ;; unloads the carrier of a robot with a box
   (:action unload_carrier
-    :parameters (?r - robot ?b - box ?c - carrier ?l - location)
+    :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
     :precondition (and
-      (rloaded ?r)
       (ral ?r ?l)
       (bal ?b ?c)
+      (rhc ?r ?c)
+      (occupied ?c ?s)
     )
     :effect (and
-      (not (rloaded ?r))
       (bal ?b ?l)
       (not (bal ?b ?c))
-    )
+      (free ?c ?s)
+      (not (occupied ?c ?s))
+      )
   )
 
   ;; loads an empty box with a supply

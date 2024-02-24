@@ -11,6 +11,7 @@
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
     carrier1 carrier2 carrier3 - carrier
+    s1 s2 s3 s4 - space
   )
 
   (:init
@@ -21,14 +22,10 @@
     (connected location1 warehouse_loc)
     (connected warehouse_loc location2)
     (connected location2 warehouse_loc)
-    ; box location
-    (bal box1 warehouse_loc)
-    (bal box2 warehouse_loc)
-    (bal box3 warehouse_loc)
-    ; box empty
-    (bempty box1)
-    (bempty box2)
-    (bempty box3)
+    ; workstations location
+    (wal workstation1 location1)
+    (wal workstation2 location1)
+    (wal workstation3 location2)
     ; robot location
     (ral robot1 warehouse_loc)
     (ral robot2 warehouse_loc)
@@ -37,10 +34,19 @@
     (rhc robot1 carrier1)
     (rhc robot2 carrier2)
     (rhc robot3 carrier3)
-    ; workstations location
-    (wal workstation1 location1)
-    (wal workstation2 location1)
-    (wal workstation3 location2)
+    ; carrier space
+    (free carrier1 s1)
+    (free carrier1 s2)
+    (free carrier2 s3)
+    (free carrier2 s4)
+    ; box location
+    (bal box1 warehouse_loc)
+    (bal box2 warehouse_loc)
+    (bal box3 warehouse_loc)
+    ; box empty
+    (bempty box1)
+    (bempty box2)
+    (bempty box3)
     ; supplies location
     (sal valve1 warehouse_loc)
     (sal valve2 warehouse_loc)
@@ -66,11 +72,11 @@
 
   (:goal
     (and
-      (ral robot1 warehouse_loc)
-      (ral robot2 warehouse_loc)
-      (ral robot3 warehouse_loc)
+      ; (ral robot1 warehouse_loc)
+      ; (ral robot2 warehouse_loc)
+      ; (ral robot3 warehouse_loc)
       (has_valve workstation1)
-      (has_tool workstation2)
+      ; (has_tool workstation2)
       (has_bolt workstation1)
     )
   )
