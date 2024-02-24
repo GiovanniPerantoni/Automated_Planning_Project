@@ -2,53 +2,44 @@
   (:requirements :strips :typing :negative-preconditions :conditional-effects)
 
   (:types
-    location - object ; can contain workstations robots and boxes
-    warehouse - location ; contains supplies
-    workstation - object ; can get boxes and contain supplies
-    robot - object ; can pick up boxes, fill them, unload them and move between locations
-    box - object ; can contain supplies
-    supply - object ; required by workstations
-    valve - supply ; type of supply
-    bolt - supply ; type of supply
-    tool - supply ; type of supply
-
-    carrier - location
-    space - object
+    location - object     ; can contain workstations robots and boxes
+    warehouse - location  ; contains supplies
+    workstation - object  ; can get boxes and contain supplies
+    robot - object        ; can pick up boxes, fill them, unload them and move between locations
+    carrier - location    ; contains boxes if it has free spaces
+    space - object        ; determines how many spaces a carrier has
+    box - object          ; can contain supplies
+    supply - object       ; required by workstations
+    valve - supply        ; type of supply
+    bolt - supply         ; type of supply
+    tool - supply         ; type of supply
   )
-
-  ;(:constants)
 
   (:predicates
     ;; locations
-    (connected ?l1 ?l2 - location) ; location ?l1 is connected to location ?l2
-
+    (connected ?l1 ?l2 - location)            ; location ?l1 is connected to location ?l2
     ;; boxes
-    (bal ?b - box ?l - location) ; box ?b is in the location ?l
-    (bempty ?b - box) ; box ?b is empty
-    (sib ?s - supply ?b - box) ; supply ?s is in box ?b
-
+    (bal ?b - box ?l - location)              ; box ?b is in the location ?l
+    (bempty ?b - box)                         ; box ?b is empty
+    (sib ?s - supply ?b - box)                ; supply ?s is in box ?b
     ;; robots
-    (ral ?r - robot ?l - location) ; robot ?r is at location ?l
-    ; (rloaded ?r - robot) ; robot ?r has a boxe
-    (rhc ?r - robot ?c - carrier) ; robot ?r has carrier ?c
-
+    (ral ?r - robot ?l - location)            ; robot ?r is at location ?l
+    (rhc ?r - robot ?c - carrier)             ; robot ?r has carrier ?c
     ;; workstations
-    (wal ?w - workstation ?l - location) ; workstation ?w is at location ?l
-    (wcontains ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
-    (has_valve ?w - workstation) ; workstation ?w has a valve
-    (has_bolt ?w - workstation) ; workstation ?w has a bolt
-    (has_tool ?w - workstation) ; workstation ?w has a tool 
-    (supply_available ?s - supply) ; supply ?s is available
-
+    (wal ?w - workstation ?l - location)      ; workstation ?w is at location ?l
+    (wcontains ?w - workstation ?s - supply)  ; workstation ?w contains supply ?s
+    (has_valve ?w - workstation)              ; workstation ?w has a valve
+    (has_bolt ?w - workstation)               ; workstation ?w has a bolt
+    (has_tool ?w - workstation)               ; workstation ?w has a tool 
+    (supply_available ?s - supply)            ; supply ?s is available
     ;; supplies
-    (sal ?s - supply ?l - location) ; supply ?s is at location ?l
-    (is_valve ?s - supply) ; supply ?s is a valve
-    (is_bolt ?s - supply) ; supply ?s is a bolt
-    (is_tool ?s - supply) ; supply ?s is a tool
-
+    (sal ?s - supply ?l - location)           ; supply ?s is at location ?l
+    (is_valve ?s - supply)                    ; supply ?s is a valve
+    (is_bolt ?s - supply)                     ; supply ?s is a bolt
+    (is_tool ?s - supply)                     ; supply ?s is a tool
     ;; carrier space
-    (free ?c - carrier ?s - space) ; space ?s is not used carrier ?c
-    (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
+    (free ?c - carrier ?s - space)            ; space ?s is not used carrier ?c
+    (occupied ?c - carrier ?s - space)        ; space ?s is used by carrier ?c
   )
 
   ;; moves a robot with its carrier to a new location

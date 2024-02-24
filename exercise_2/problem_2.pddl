@@ -72,12 +72,15 @@
 
   (:goal
     (and
-      ; (ral robot1 warehouse_loc)
-      ; (ral robot2 warehouse_loc)
-      ; (ral robot3 warehouse_loc)
-      (has_valve workstation1)
-      ; (has_tool workstation2)
-      (has_bolt workstation1)
+      (ral robot1 warehouse_loc)    ;1
+      (ral robot2 warehouse_loc)    ;2
+      (ral robot3 warehouse_loc)    ;3
+      (has_valve workstation1)      ;4
+      (has_bolt workstation1)       ;5
+      (has_tool workstation1)       ;6
+      (has_tool workstation2)       ;7
+      (has_valve workstation3)      ;8
+      (has_bolt workstation3)       ;9
     )
   )
 )
