@@ -93,8 +93,6 @@
     )
   )
 
-  ;; ======================================================================
-
   ;; loads an empty box with a supply
   (:action load_supply
     :parameters (?r - robot ?l - location ?b - box ?s - supply)
