@@ -1,5 +1,5 @@
-(define (problem problem1_1)
-  (:domain industial_planning_2)
+(define (problem problem2_2)
+  (:domain logistic_planning_2)
 
   (:objects
     robot1 robot2 robot3 - robot

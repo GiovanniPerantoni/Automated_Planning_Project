@@ -1,4 +1,4 @@
-(define (domain industial_planning_1)
+(define (domain logistic_planning_1)
   (:requirements :strips :typing :negative-preconditions :conditional-effects)
 
   (:types

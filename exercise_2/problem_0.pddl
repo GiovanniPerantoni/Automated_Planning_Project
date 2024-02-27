@@ -1,5 +1,5 @@
-(define (problem problem1_1)
-  (:domain industial_planning_2)
+(define (problem problem2_0)
+  (:domain logistic_planning_2)
 
   (:objects
     robot1 - robot
@@ -11,6 +11,7 @@
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
     carrier1 - carrier
+    space1 space2 space3 - space
   )
 
   (:init
@@ -22,28 +23,32 @@
     (connected warehouse_loc location2)
     (connected location2 warehouse_loc)
     ; box location
-    (bal box1 warehouse_loc)
-    (bal box2 warehouse_loc)
-    (bal box3 warehouse_loc)
+    (box_at_loc box1 warehouse_loc)
+    (box_at_loc box2 warehouse_loc)
+    (box_at_loc box3 warehouse_loc)
     ; box empty
-    (bempty box1)
-    (bempty box2)
-    (bempty box3)
+    (box_empty box1)
+    (box_empty box2)
+    (box_empty box3)
     ; robot location
-    (ral robot1 warehouse_loc)
+    (robot_at_loc robot1 warehouse_loc)
     ; carrier owner
-    (rhc robot1 carrier1)
+    (robot_has_carrier robot1 carrier1)
+    ; carrier spaces
+    (free carrier1 space1)
+    (free carrier1 space2)
+    (free carrier1 space3)
     ; workstations location
-    (wal workstation1 location1)
-    (wal workstation2 location1)
-    (wal workstation3 location2)
+    (ws_at_loc workstation1 location1)
+    (ws_at_loc workstation2 location1)
+    (ws_at_loc workstation3 location2)
     ; supplies location
-    (sal valve1 warehouse_loc)
-    (sal valve2 warehouse_loc)
-    (sal bolt1 warehouse_loc)
-    (sal bolt2 warehouse_loc)
-    (sal tool1 warehouse_loc)
-    (sal tool2 warehouse_loc)
+    (supply_at_loc valve1 warehouse_loc)
+    (supply_at_loc valve2 warehouse_loc)
+    (supply_at_loc bolt1 warehouse_loc)
+    (supply_at_loc bolt2 warehouse_loc)
+    (supply_at_loc tool1 warehouse_loc)
+    (supply_at_loc tool2 warehouse_loc)
     ; supply type
     (is_valve valve1)
     (is_valve valve2)
@@ -62,8 +67,8 @@
 
   (:goal
     (and
-      (bal box1 location1)
-      (bal box2 location2)
+      (box_at_loc box1 location1)
+      (box_at_loc box2 location2)
     )
   )
 )
