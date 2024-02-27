@@ -21,6 +21,7 @@
     ;; boxes
     (bal ?b - box ?l - location)              ; box ?b is in the location ?l
     (bempty ?b - box)                         ; box ?b is empty
+    (bfull ?b - box)                                   ; box ?b is full
     (sib ?s - supply ?b - box)                ; supply ?s is in box ?b
     ;; robots
     (ral ?r - robot ?l - location)            ; robot ?r is at location ?l
@@ -103,6 +104,7 @@
     :effect (and 
       (sib ?s ?b) 
       (not (bempty ?b)) 
+      (bfull ?b)
       (not (sal ?s ?l))
     )
   )
@@ -115,10 +117,11 @@
       (sib ?s ?b) 
       (bal ?b ?l) 
       (wal ?w ?l) 
-      (not (bempty ?b))
+      (bfull ?b)
     )
     :effect (and 
       (bempty ?b) 
+      (not bfull ?b)
       (sal ?s ?l) 
       (wcontains ?w ?s) 
       (not (sib ?s ?b)) 
