@@ -42,13 +42,6 @@
     (supply_at_loc bolt2 warehouse_loc)
     (supply_at_loc tool1 warehouse_loc)
     (supply_at_loc tool2 warehouse_loc)
-    ; supply type
-    (is_valve valve1)
-    (is_valve valve2)
-    (is_bolt bolt1)
-    (is_bolt bolt2)
-    (is_tool tool1)
-    (is_tool tool2)
     ; supplies availabity
     (supply_available valve1)
     (supply_available valve2)

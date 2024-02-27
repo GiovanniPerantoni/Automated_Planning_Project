@@ -42,13 +42,7 @@
     (supply_at_loc bolt2 warehouse_loc)
     (supply_at_loc tool1 warehouse_loc)
     (supply_at_loc tool2 warehouse_loc)
-    ; supply type
-    (is_valve valve1)
-    (is_valve valve2)
-    (is_bolt bolt1)
-    (is_bolt bolt2)
-    (is_tool tool1)
-    (is_tool tool2)
+
     ; supplies availability
     (supply_available valve1)
     (supply_available valve2)
@@ -63,10 +57,10 @@
       (robot_at_loc robot1 location1)      ;1
       (has_valve workstation1)        ;2
       (has_bolt workstation1)         ;3
-      (has_tool workstation1)         ;4
-      (has_valve workstation2)        ;5 
-      (has_bolt workstation3)         ;7
-      (has_tool workstation3)         ;8
+      ; (has_tool workstation1)         ;4
+      ; (has_valve workstation2)        ;5 
+      ; (has_bolt workstation3)         ;7
+      ; (has_tool workstation3)         ;8
     )
   )
 )

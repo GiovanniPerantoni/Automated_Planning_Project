@@ -1,5 +1,5 @@
 (define (domain logistic_planning_1)
-  (:requirements :strips :typing :conditional-effects)
+  (:requirements :strips :typing)
 
   (:types
     location - object ; can contain workstations robots and boxes
@@ -41,9 +41,6 @@
     (supply_available ?s - supply) ; supply ?s is available
     ;; supplies
     (supply_at_loc ?s - supply ?l - location) ; supply ?s is at location ?l
-    (is_valve ?s - supply) ; supply ?s is a valve
-    (is_bolt ?s - supply) ; supply ?s is a bolt
-    (is_tool ?s - supply) ; supply ?s is a tool
   )
 
   ;; moves a robot between two connected locations
@@ -125,32 +122,65 @@
   )
 
   ;; unloads the content of a box to a given workstation (:action unload_supply
-  (:action unload_supply
-    :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
+  (:action unload_valve
+    :parameters (?r - robot ?b - box ?valve - valve ?l - location ?w - workstation)
     :precondition (and
       (robot_at_loc ?r ?l)
-      (supply_in_box ?s ?b)
+      (supply_in_box ?valve ?b)
       (box_at_loc ?b ?l)
       (ws_at_loc ?w ?l)
       (box_full ?b)
+      ;; (is_valve ?s)
     )
     :effect (and
       (box_empty ?b)
       (not (box_full ?b))
-      (ws_contains ?w ?s)
-      (not (supply_in_box ?s ?b))
-      (not (supply_available ?s))
-      (when
-        (is_valve ?s)
-        (has_valve ?w))
-      (when
-        (is_bolt ?s)
-        (has_bolt ?w))
-      (when
-        (is_tool ?s)
-        (has_tool ?w))
+      (supply_at_loc ?valve ?l)
+      (ws_contains ?w ?valve)
+      (not (supply_in_box ?valve ?b))
+      (not (supply_available ?valve))
+      (has_valve ?w)
     )
   )
 
-  (:action unload_)
+  (:action unload_bolt
+    :parameters (?r - robot ?b - box ?bolt - bolt ?l - location ?w - workstation)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (supply_in_box ?bolt ?b)
+      (box_at_loc ?b ?l)
+      (ws_at_loc ?w ?l)
+      (box_full ?b)
+      ;; (is_bolt ?bolt)
+    )
+    :effect (and
+      (box_empty ?b)
+      (not (box_full ?b))
+      (supply_at_loc ?bolt ?l)
+      (ws_contains ?w ?bolt)
+      (not (supply_in_box ?bolt ?b))
+      (not (supply_available ?bolt))
+      (has_bolt ?w)
+    )
+  )
+  (:action unload_tool
+    :parameters (?r - robot ?b - box ?tool - tool ?l - location ?w - workstation)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (supply_in_box ?tool ?b)
+      (box_at_loc ?b ?l)
+      (ws_at_loc ?w ?l)
+      (box_full ?b)
+      ; (is_tool ?tool)
+    )
+    :effect (and
+      (box_empty ?b)
+      (not (box_full ?b))
+      (supply_at_loc ?tool ?l)
+      (ws_contains ?w ?tool)
+      (not (supply_in_box ?tool ?b))
+      (not (supply_available ?tool))
+      (has_tool ?w)
+    )
+  )
 )
