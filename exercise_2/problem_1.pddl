@@ -77,6 +77,7 @@
       ; (robot_at_loc robot1 warehouse_loc)     ;1
       ; (robot_at_loc robot2 warehouse_loc)     ;2
       ; (robot_at_loc robot3 warehouse_loc)     ;3
+      ; (not (has_bolt workstation2))             ;4
       (has_valve workstation1)                ;4
       (has_bolt workstation1)                 ;5
       ; (has_tool workstation1)                 ;6

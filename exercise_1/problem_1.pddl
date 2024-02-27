@@ -10,8 +10,6 @@
     valve1 valve2 - valve
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
-    space1 space2 space3 - object
-    occupied1 occupied2 occupied3 - object
   )
 
   (:init
@@ -23,26 +21,27 @@
     (connected warehouse_loc location2)
     (connected location2 warehouse_loc)
     ; box location
-    (bal box1 warehouse_loc)
-    (bal box2 warehouse_loc)
-    (bal box3 warehouse_loc)
+    (box_at_loc box1 warehouse_loc)
+    (box_at_loc box2 warehouse_loc)
+    (box_at_loc box3 warehouse_loc)
     ; box empty
-    (bempty box1)
-    (bempty box2)
-    (bempty box3)
+    (box_empty box1)
+    (box_empty box2)
+    (box_empty box3)
     ; robot location
-    (ral robot1 warehouse_loc)
+    (robot_at_loc robot1 warehouse_loc)
+    (robot_unloaded robot1)
     ; workstations location
-    (wal workstation1 location1)
-    (wal workstation2 location1)
-    (wal workstation3 location2)
+    (ws_at_loc workstation1 location1)
+    (ws_at_loc workstation2 location1)
+    (ws_at_loc workstation3 location2)
     ; supplies location
-    (sal valve1 warehouse_loc)
-    (sal valve2 warehouse_loc)
-    (sal bolt1 warehouse_loc)
-    (sal bolt2 warehouse_loc)
-    (sal tool1 warehouse_loc)
-    (sal tool2 warehouse_loc)
+    (supply_at_loc valve1 warehouse_loc)
+    (supply_at_loc valve2 warehouse_loc)
+    (supply_at_loc bolt1 warehouse_loc)
+    (supply_at_loc bolt2 warehouse_loc)
+    (supply_at_loc tool1 warehouse_loc)
+    (supply_at_loc tool2 warehouse_loc)
     ; supply type
     (is_valve valve1)
     (is_valve valve2)
@@ -61,12 +60,11 @@
 
   (:goal
     (and
-      (ral robot1 warehouse_loc)      ;1
+      (robot_at_loc robot1 location1)      ;1
       (has_valve workstation1)        ;2
       (has_bolt workstation1)         ;3
       (has_tool workstation1)         ;4
       (has_valve workstation2)        ;5 
-      (not (has_tool workstation2))   ;6 (workstation2 does not need tool)
       (has_bolt workstation3)         ;7
       (has_tool workstation3)         ;8
     )

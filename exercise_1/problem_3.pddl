@@ -23,23 +23,25 @@
     (connected location3 location1)
     (connected location4 location3)
     ; box location
-    (bal box1 warehouse_loc)
+    (box_at_loc box1 warehouse_loc)
     ; box empty
-    (bempty box1)
+    (box_empty box1)
     ; robot location
-    (ral robot1 warehouse_loc)
+    (robot_at_loc robot1 warehouse_loc)
+    ; robot unloaded
+    (robot_unloaded robot1)
     ; workstation location
-    (wal workstation1 location2)
-    (wal workstation2 location3)
-    (wal workstation3 location4)
-    (wal workstation4 location4)
+    (ws_at_loc workstation1 location2)
+    (ws_at_loc workstation2 location3)
+    (ws_at_loc workstation3 location4)
+    (ws_at_loc workstation4 location4)
     ; supplies location
-    (sal valve1 warehouse_loc)
-    (sal valve2 warehouse_loc)
-    (sal bolt1 warehouse_loc)
-    (sal bolt2 warehouse_loc)
-    (sal tool1 warehouse_loc)
-    (sal tool2 warehouse_loc)
+    (supply_at_loc valve1 warehouse_loc)
+    (supply_at_loc valve2 warehouse_loc)
+    (supply_at_loc bolt1 warehouse_loc)
+    (supply_at_loc bolt2 warehouse_loc)
+    (supply_at_loc tool1 warehouse_loc)
+    (supply_at_loc tool2 warehouse_loc)
     ; supply type
     (is_valve valve1)
     (is_valve valve2)
@@ -57,7 +59,7 @@
   )
 
   (:goal (and
-    (ral robot1 warehouse_loc)  ; 0
+    (robot_at_loc robot1 warehouse_loc)  ; 0
     (has_valve workstation1)    ; 1
     (has_valve workstation4)    ; 2
     (has_bolt workstation3)     ; 3
