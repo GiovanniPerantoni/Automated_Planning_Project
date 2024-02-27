@@ -93,15 +93,36 @@
   ;; loads an empty box with a supply
   (:action load_supply
     :parameters (?r - robot ?l - location ?b - box ?s - supply)
-    :precondition (and (ral ?r ?l) (bal ?b ?l) (sal ?s ?l) (bempty ?b) (supply_available ?s))
-    :effect (and (sib ?s ?b) (not (bempty ?b)) (not (sal ?s ?l)))
+    :precondition (and 
+      (ral ?r ?l) 
+      (bal ?b ?l) 
+      (sal ?s ?l) 
+      (bempty ?b) 
+      (supply_available ?s)
+    )
+    :effect (and 
+      (sib ?s ?b) 
+      (not (bempty ?b)) 
+      (not (sal ?s ?l))
+    )
   )
 
   ;; unloads the content of a box to a given workstation
   (:action unload_supply
     :parameters (?r - robot ?b - box ?s - supply ?l - location ?w - workstation)
-    :precondition (and (ral ?r ?l) (sib ?s ?b) (bal ?b ?l) (wal ?w ?l) (not (bempty ?b)))
-    :effect (and (bempty ?b) (sal ?s ?l) (wcontains ?w ?s) (not (sib ?s ?b)) (not (supply_available ?s))
+    :precondition (and 
+      (ral ?r ?l) 
+      (sib ?s ?b) 
+      (bal ?b ?l) 
+      (wal ?w ?l) 
+      (not (bempty ?b))
+    )
+    :effect (and 
+      (bempty ?b) 
+      (sal ?s ?l) 
+      (wcontains ?w ?s) 
+      (not (sib ?s ?b)) 
+      (not (supply_available ?s))
       (when
         (is_valve ?s)
         (has_valve ?w))
