@@ -151,4 +151,6 @@
         (has_tool ?w))
     )
   )
+
+  (:action unload_)
 )
