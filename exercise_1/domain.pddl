@@ -24,10 +24,12 @@
     (bal ?b - box ?l - location) ; box ?b is in the location ?l
     (bor ?b - box ?r - robot) ; box ?b on robot ?r
     (bempty ?b - box) ; box ?b is empty
+    (bfull ?b - box)  ; box ?b is full
     (sib ?s - supply ?b - box) ; supply ?s is in box ?b
 
     ;; robots
     (ral ?r - robot ?l - location) ; robot ?r is at location ?l
+    (runloaded ?r - robot)  ; robot ?r doesen't have a box
     (rloaded ?r - robot) ; robot ?r has a boxe
 
     ;; workstations
@@ -50,7 +52,7 @@
     :precondition (and 
       (connected ?from ?to)
       (ral ?r ?from) 
-      (not (rloaded ?r))
+      (runloaded ?r)
     )
     :effect (and 
       (ral ?r ?to)
@@ -63,10 +65,11 @@
     :parameters (?r - robot ?b - box ?l - location)
     :precondition (and 
       (ral ?r ?l) 
-      (not (rloaded ?r)) 
+      (runloaded ?r)
       (bal ?b ?l)
     )
     :effect (and 
+      (not runloaded ?r)
       (rloaded ?r) 
       (bor ?b ?r) 
       (not (bal ?b ?l))
@@ -98,6 +101,7 @@
     )
     :effect (and
       (not (rloaded ?r))
+      (runloaded ?r)
       (not (bor ?b ?r))
     )
   )
@@ -115,6 +119,7 @@
     :effect (and 
       (sib ?s ?b) 
       (not (bempty ?b)) 
+      (bfull ?b)
       (not (sal ?s ?l))
     )
   )
@@ -127,10 +132,11 @@
       (sib ?s ?b) 
       (bal ?b ?l) 
       (wal ?w ?l) 
-      (not (bempty ?b))
+      (bfull ?b)
     )
     :effect (and 
       (bempty ?b) 
+      (not (bfull ?b))
       (sal ?s ?l) 
       (wcontains ?w ?s) 
       (not (sib ?s ?b)) 
