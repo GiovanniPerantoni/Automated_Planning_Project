@@ -18,7 +18,7 @@
   (:predicates
     ;; locations
     (connected ?l1 ?l2 - location) ; location ?l1 is connected to location ?l2
-    ; boxes
+    ;; boxes
     (box_at_loc ?b - box ?l - location) ; box ?b is in the location ?l
     (box_empty ?b - box) ; box ?b is empty
     (box_full ?b - box) ; box ?b is full
@@ -26,18 +26,18 @@
     ;; robots
     (robot_at_loc ?r - robot ?l - location) ; robot ?r is at location ?l
     (robot_has_carrier ?r - robot ?c - carrier) ; robot ?r has carrier ?c
-    ; workstations
+    ;; workstations
     (ws_at_loc ?w - workstation ?l - location) ; workstation ?w is at location ?l
-    (ws_contains_supply ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
+    ; (ws_contains_supply ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
     (has_valve ?w - workstation) ; workstation ?w has a valve
     (has_bolt ?w - workstation) ; workstation ?w has a bolt
     (has_tool ?w - workstation) ; workstation ?w has a tool 
     (supply_available ?s - supply) ; supply ?s is available
-    ; supplies
+    ;; supplies
     (supply_at_loc ?s - supply ?l - location) ; supply ?s is at location ?l
-    (is_valve ?s - supply) ; supply ?s is a valve
-    (is_bolt ?s - supply) ; supply ?s is a bolt
-    (is_tool ?s - supply) ; supply ?s is a tool
+    ; (is_valve ?s - supply) ; supply ?s is a valve
+    ; (is_bolt ?s - supply) ; supply ?s is a bolt
+    ; (is_tool ?s - supply) ; supply ?s is a tool
     ; carrier space
     (free ?c - carrier ?s - space) ; space ?s is not used carrier ?c
     (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
