@@ -2,15 +2,15 @@
   (:domain logistic_planning_4)
 
   (:objects
-    robot1 robot2 - robot
+    robot1 robot2 robot3 - robot
     warehouse_loc location1 location2 - location
-    workstation1 workstation2 - workstation
+    workstation1 workstation2 workstation3 - workstation
     box1 box2 box3 - box
     valve1 valve2 - valve
     bolt1 bolt2 - bolt
     tool1 tool2 - tool
-    carrier1 carrier2 - carrier
-    s1 s2 s3 s4 - space
+    carrier1 carrier2 carrier3 - carrier
+    s1 s2 s3 s4 s5 s6 - space
     )
 
   (:init
@@ -24,15 +24,20 @@
     ;; workstations location
     (ws_at_loc workstation1 location1)
     (ws_at_loc workstation2 location1)
+    (ws_at_loc workstation3 location2)
     ;; robot location
     (robot_at_loc robot1 warehouse_loc)
     (robot_at_loc robot2 warehouse_loc)
+    (robot_at_loc robot3 warehouse_loc)
     ;; carrier owner
     (robot_has_carrier robot1 carrier1)
     (robot_has_carrier robot2 carrier2)
+    (robot_has_carrier robot3 carrier3)
     ;; carrier space
     (free carrier1 s1)
     (free carrier1 s2)
+    (free carrier1 s5)
+    (free carrier1 s6)
     (free carrier2 s3)
     (free carrier2 s4)
     ;; box location
@@ -61,14 +66,15 @@
 
   (:goal
     (and
-      (robot_at_loc robot1 location1)
-      (robot_at_loc robot2 warehouse_loc)
-      (has_valve workstation1)
-      (has_bolt workstation1)
-      (has_tool workstation1)
-      (has_valve workstation2)
-      (has_bolt workstation2)
-      (has_tool workstation2)
+      (robot_at_loc robot1 location1) ;1
+      (robot_at_loc robot2 warehouse_loc)     ;2
+      (robot_at_loc robot3 warehouse_loc)     ;3
+      (has_valve workstation1)                ;4
+      (has_bolt workstation1)                 ;5
+      (has_tool workstation1)                 ;6
+      (has_tool workstation2)                 ;7
+      (has_valve workstation3)                ;8
+      (has_bolt workstation3)                 ;9
     )
   )
 
