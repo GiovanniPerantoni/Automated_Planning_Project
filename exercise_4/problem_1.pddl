@@ -61,7 +61,7 @@
 
   (:goal
     (and
-      (robot_at_loc robot1 location1)
+      (robot_at_loc robot1 warehouse_loc)
       (robot_at_loc robot2 warehouse_loc)
       (has_valve workstation1)
       (has_bolt workstation1)

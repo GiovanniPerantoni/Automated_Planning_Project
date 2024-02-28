@@ -45,22 +45,22 @@
 
   (:durative-action move_carrier
     :parameters (?r - robot ?c - carrier ?from ?to - location)
-    :duration (= ?duration 1)
+    :duration (= ?duration 5)
     :condition (and
       (at start(connected ?from ?to))
       (at start(robot_at_loc ?r ?from))
       (at start(robot_has_carrier ?r ?c))
     )
     :effect (and
-      (at start(not (robot_at_loc ?r ?from)))
-      (at start(robot_at_loc ?r ?to))
+      (at end(not (robot_at_loc ?r ?from)))
+      (at end(robot_at_loc ?r ?to))
     )
   )
 
   ;; loads the carrier of a robot with a box
   (:durative-action load_carrier
     :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start(robot_at_loc ?r ?l))
       (at start(box_at_loc ?b ?l))
@@ -68,17 +68,17 @@
       (at start(free ?c ?s))
     )
     :effect (and
-      (at start(not (box_at_loc ?b ?l)))
-      (at start(box_at_loc ?b ?c))
-      (at start(not (free ?c ?s)))
-      (at start(occupied ?c ?s))
+      (at end(not (box_at_loc ?b ?l)))
+      (at end(box_at_loc ?b ?c))
+      (at end(not (free ?c ?s)))
+      (at end(occupied ?c ?s))
     )
   )
 
   ;; unloads the carrier of a robot with a box
   (:durative-action unload_carrier
     :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start(robot_at_loc ?r ?l))
       (at start(box_at_loc ?b ?c))
@@ -86,10 +86,10 @@
       (at start(occupied ?c ?s))
     )
     :effect (and
-      (at start(box_at_loc ?b ?l))
-      (at start(not (box_at_loc ?b ?c)))
-      (at start(free ?c ?s))
-      (at start(not (occupied ?c ?s)))
+      (at end(box_at_loc ?b ?l))
+      (at end(not (box_at_loc ?b ?c)))
+      (at end(free ?c ?s))
+      (at end(not (occupied ?c ?s)))
     )
   )
 
@@ -105,10 +105,10 @@
       (at start(supply_available ?s))
     )
     :effect (and
-      (at start(supply_in_box ?s ?b))
-      (at start(not (box_empty ?b)))
-      (at start(box_full ?b))
-      (at start(not (supply_at_loc ?s ?l)))
+      (at end(supply_in_box ?s ?b))
+      (at end(not (box_empty ?b)))
+      (at end(box_full ?b))
+      (at end(not (supply_at_loc ?s ?l)))
     )
   )
 
@@ -124,12 +124,12 @@
       (at start (box_full ?b))
     )
     :effect (and
-      (at start (box_empty ?b))
-      (at start (not (box_full ?b)))
-      (at start (supply_at_loc ?valve ?l))
-      (at start (not (supply_in_box ?valve ?b)))
-      (at start (not (supply_available ?valve)))
-      (at start (has_valve ?w))
+      (at end (box_empty ?b))
+      (at end (not (box_full ?b)))
+      (at end (supply_at_loc ?valve ?l))
+      (at end (not (supply_in_box ?valve ?b)))
+      (at end (not (supply_available ?valve)))
+      (at end (has_valve ?w))
     )
   )
 
@@ -145,12 +145,12 @@
       (at start (box_full ?b))
     )
     :effect (and
-      (at start (box_empty ?b))
-      (at start (not (box_full ?b)))
-      (at start (supply_at_loc ?bolt ?l))
-      (at start (not (supply_in_box ?bolt ?b)))
-      (at start (not (supply_available ?bolt)))
-      (at start (has_bolt ?w))
+      (at end (box_empty ?b))
+      (at end (not (box_full ?b)))
+      (at end (supply_at_loc ?bolt ?l))
+      (at end (not (supply_in_box ?bolt ?b)))
+      (at end (not (supply_available ?bolt)))
+      (at end (has_bolt ?w))
     )
   )
 
@@ -166,12 +166,12 @@
       (at start (box_full ?b))
     )
     :effect (and
-      (at start (box_empty ?b))
-      (at start (not (box_full ?b)))
-      (at start (supply_at_loc ?tool ?l))
-      (at start (not (supply_in_box ?tool ?b)))
-      (at start (not (supply_available ?tool)))
-      (at start (has_tool ?w))
+      (at end (box_empty ?b))
+      (at end (not (box_full ?b)))
+      (at end (supply_at_loc ?tool ?l))
+      (at end (not (supply_in_box ?tool ?b)))
+      (at end (not (supply_available ?tool)))
+      (at end (has_tool ?w))
     )
   )
 )
