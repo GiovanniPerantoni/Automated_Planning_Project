@@ -63,7 +63,7 @@
     :duration (= ?duration 1)
     :condition (and
       (at start (robot_at_loc ?r ?l))
-      (at start (box_at_loc ?b ?l))
+      (over all (box_at_loc ?b ?l))
       (at start (robot_has_carrier ?r ?c))
       (at start (free ?c ?s))
       (at start (robot_is_not_acting ?r))
@@ -107,7 +107,7 @@
       (at start (robot_at_loc ?r ?l))
       (at start (box_at_loc ?b ?l))
       (at start (supply_at_loc ?s ?l))
-      (at start (box_empty ?b))
+      (over all (box_empty ?b))
       (at start (supply_available ?s))
       (at start (robot_is_not_acting ?r))
     )
