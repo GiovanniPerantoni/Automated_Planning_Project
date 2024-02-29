@@ -26,6 +26,7 @@
     ;; robots
     (robot_at_loc ?r - robot ?l - location) ; robot ?r is at location ?l
     (robot_has_carrier ?r - robot ?c - carrier) ; robot ?r has carrier ?c
+    (robot_is_not_acting ?r - robot) ; robot ?r is not acting
     ;; workstations
     (ws_at_loc ?w - workstation ?l - location) ; workstation ?w is at location ?l
     ; (ws_contains_supply ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
@@ -50,8 +51,11 @@
       (at start(connected ?from ?to))
       (at start(robot_at_loc ?r ?from))
       (at start(robot_has_carrier ?r ?c))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start(not (robot_is_not_acting ?r)))
+      (at end(robot_is_not_acting ?r))
       (at end(not (robot_at_loc ?r ?from)))
       (at end(robot_at_loc ?r ?to))
     )
@@ -66,8 +70,11 @@
       (at start(box_at_loc ?b ?l))
       (at start(robot_has_carrier ?r ?c))
       (at start(free ?c ?s))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end(not (box_at_loc ?b ?l)))
       (at end(box_at_loc ?b ?c))
       (at end(not (free ?c ?s)))
@@ -84,8 +91,11 @@
       (at start(box_at_loc ?b ?c))
       (at start(robot_has_carrier ?r ?c))
       (at start(occupied ?c ?s))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end(box_at_loc ?b ?l))
       (at end(not (box_at_loc ?b ?c)))
       (at end(free ?c ?s))
@@ -103,8 +113,11 @@
       (at start(supply_at_loc ?s ?l))
       (at start(box_empty ?b))
       (at start(supply_available ?s))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end(supply_in_box ?s ?b))
       (at end(not (box_empty ?b)))
       (at end(box_full ?b))
@@ -122,8 +135,11 @@
       (at start (box_at_loc ?b ?l))
       (at start (ws_at_loc ?w ?l))
       (at start (box_full ?b))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end (box_empty ?b))
       (at end (not (box_full ?b)))
       (at end (supply_at_loc ?valve ?l))
@@ -143,8 +159,11 @@
       (at start (box_at_loc ?b ?l))
       (at start (ws_at_loc ?w ?l))
       (at start (box_full ?b))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end (box_empty ?b))
       (at end (not (box_full ?b)))
       (at end (supply_at_loc ?bolt ?l))
@@ -164,8 +183,11 @@
       (at start (box_at_loc ?b ?l))
       (at start (ws_at_loc ?w ?l))
       (at start (box_full ?b))
+      (at start(robot_is_not_acting ?r))
     )
     :effect (and
+      (at start (not (robot_is_not_acting ?r)))
+      (at end (robot_is_not_acting ?r))
       (at end (box_empty ?b))
       (at end (not (box_full ?b)))
       (at end (supply_at_loc ?tool ?l))
