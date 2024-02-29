@@ -1,4 +1,4 @@
-(define (problem problem4_1)
+(define (problem problem4_2)
   (:domain logistic_planning_4)
 
   (:objects

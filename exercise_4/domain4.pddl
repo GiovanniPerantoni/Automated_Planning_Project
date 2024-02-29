@@ -6,7 +6,6 @@
     carrier - location ; contains boxes if it has free spaces
     workstation - object ; can get boxes and contain supplies
     robot - object ; can pick up boxes, fill them, unload them and move between locations
-    ; warehouse - location ; contains supplies
     space - object ; determines how many spaces a carrier has
     box - object ; can contain supplies
     supply - object ; required by workstations
@@ -29,21 +28,18 @@
     (robot_is_not_acting ?r - robot) ; robot ?r is not acting
     ;; workstations
     (ws_at_loc ?w - workstation ?l - location) ; workstation ?w is at location ?l
-    ; (ws_contains_supply ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
     (has_valve ?w - workstation) ; workstation ?w has a valve
     (has_bolt ?w - workstation) ; workstation ?w has a bolt
     (has_tool ?w - workstation) ; workstation ?w has a tool 
     (supply_available ?s - supply) ; supply ?s is available
     ;; supplies
     (supply_at_loc ?s - supply ?l - location) ; supply ?s is at location ?l
-    ; (is_valve ?s - supply) ; supply ?s is a valve
-    ; (is_bolt ?s - supply) ; supply ?s is a bolt
-    ; (is_tool ?s - supply) ; supply ?s is a tool
-    ; carrier space
+    ;; carrier space
     (free ?c - carrier ?s - space) ; space ?s is not used carrier ?c
     (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
   )
 
+  ;; move robot and its carrier from one location to another
   (:durative-action move_carrier
     :parameters (?r - robot ?c - carrier ?from ?to - location)
     :duration (= ?duration 5)
@@ -64,7 +60,7 @@
   ;; loads the carrier of a robot with a box
   (:durative-action load_carrier
     :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
-    :duration (= ?duration 2)
+    :duration (= ?duration 1)
     :condition (and
       (at start(robot_at_loc ?r ?l))
       (at start(box_at_loc ?b ?l))
@@ -85,7 +81,7 @@
   ;; unloads the carrier of a robot with a box
   (:durative-action unload_carrier
     :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
-    :duration (= ?duration 2)
+    :duration (= ?duration 1)
     :condition (and
       (at start(robot_at_loc ?r ?l))
       (at start(box_at_loc ?b ?c))
@@ -106,7 +102,7 @@
   ;; loads an empty box with a supply
   (:durative-action load_supply
     :parameters (?r - robot ?l - location ?b - box ?s - supply)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start(robot_at_loc ?r ?l))
       (at start(box_at_loc ?b ?l))
@@ -128,7 +124,7 @@
   ;; unloads the content of a box to a given workstation 
   (:durative-action unload_valve
     :parameters (?r - robot ?b - box ?valve - valve ?l - location ?w - workstation)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start (robot_at_loc ?r ?l))
       (at start (supply_in_box ?valve ?b))
@@ -152,7 +148,7 @@
   ;; unloads the content of a box to a given workstation 
   (:durative-action unload_bolt
     :parameters (?r - robot ?b - box ?bolt - bolt ?l - location ?w - workstation)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start (robot_at_loc ?r ?l))
       (at start (supply_in_box ?bolt ?b))
@@ -176,7 +172,7 @@
   ;; unloads the content of a box to a given workstation 
   (:durative-action unload_tool
     :parameters (?r - robot ?b - box ?tool - tool ?l - location ?w - workstation)
-    :duration (= ?duration 1)
+    :duration (= ?duration 2)
     :condition (and
       (at start (robot_at_loc ?r ?l))
       (at start (supply_in_box ?tool ?b))
