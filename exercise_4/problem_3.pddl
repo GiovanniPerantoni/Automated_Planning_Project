@@ -40,10 +40,10 @@
     ;; carrier space
     (free carrier1 s1)
     (free carrier1 s2)
-    (free carrier3 s5)
-    (free carrier3 s6)
     (free carrier2 s3)
     (free carrier2 s4)
+    (free carrier3 s5)
+    (free carrier3 s6)
     ;; box location
     (box_at_loc box1 warehouse_loc)
     (box_at_loc box2 warehouse_loc)
@@ -70,19 +70,26 @@
 
   (:goal
     (and
-      ;; UNSOLVED
+      (robot_at_loc robot1 location1)
 
+      ;; SOLVED
+
+      ;; same supply in 2 different locations
+      ; (supply_at_loc valve1 location1)
+      ; (supply_at_loc valve1 location2)
+
+      ;; same supply in 2 different boxes
       ; (supply_in_box valve1 box1)
       ; (supply_in_box valve1 box2)
 
-      ; (supply_at_loc valve1 location1)
-      ; (supply_at_loc valve2 location2)
+      ;; 2 different supplies in same box
+      ; (supply_in_box valve1 box1)
+      ; (supply_in_box valve2 box1)
 
-      (box_at_loc box1 carrier1)
-      (box_at_loc box1 carrier2)
-      (box_at_loc box1 carrier3)
-
-      ;; SOLVED
+      ;; same box in different carriers
+      ; (box_at_loc box1 carrier1)
+      ; (box_at_loc box1 carrier2)
+      ; (box_at_loc box1 carrier3)
 
     )
   )
