@@ -1,0 +1,38 @@
+(define (domain logistic_planning_3)
+  (:requirements :typing :hierachie)
+
+  (:types
+    workstation - object ; can get boxes and contain supplies
+  )
+
+  (:predicates
+    (has_valve ?w - workstation) ; workstation ?w has a valve
+    (has_bolt ?w - workstation) ; workstation ?w has a bolt
+    (has_tool ?w - workstation) ; workstation ?w has a tool 
+  )
+
+  (:task dummy_task
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+
+  (:method dummy_method
+    :parameters (?w - workstation)
+    :task (dummy_task ?w)
+    :subtasks (and
+        (task0 dummy_action ?w)
+    )
+  )
+
+  (:action dummy_action
+    :parameters (?w - workstation)
+    :precondition (and
+      (has_tool ?w)
+    )
+    :effect (and
+      (has_valve ?w)
+      (not (has_tool ?w))
+    )
+  )
+)

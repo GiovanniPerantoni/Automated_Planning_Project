@@ -1,0 +1,18 @@
+(define
+  (problem problem3_0)
+  (:domain logistic_planning_3)
+
+  (:objects
+    workstation1 - workstation
+  )
+
+  (:htn
+    :subtasks (and
+      (task0 (dummy_task workstation1))
+    )
+  )
+
+  (:init
+    (has_tool workstation1)
+  )
+)
