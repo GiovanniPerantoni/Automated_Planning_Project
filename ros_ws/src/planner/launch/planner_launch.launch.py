@@ -39,7 +39,7 @@ def generate_launch_description():
             'launch',
             'plansys2_bringup_launch_monolithic.py')),
         launch_arguments={
-          'model_file': example_dir + '/pddl/domain2.pddl',
+          'model_file': example_dir + '/pddl/domain4.pddl',
           'namespace': namespace
           }.items())
 
@@ -64,6 +64,14 @@ def generate_launch_description():
         package='planner',
         executable='unload_carrier_node',
         name='unload_carrier_node',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+    
+    move_carrier_cmd = Node(
+        package='planner',
+        executable='move_carrier_node',
+        name='move_carrier_node',
         namespace=namespace,
         output='screen',
         parameters=[])
@@ -100,14 +108,19 @@ def generate_launch_description():
         output='screen',
         parameters=[])
     
+    ld = LaunchDescription()
 
-    ld.add_action()
-
+    ld.add_action(declare_namespace_cmd)
     # Declare the launch options
     ld.add_action(plansys2_cmd)
 
-    ld.add_action(move_cmd)
-    ld.add_action(charge_cmd)
-    ld.add_action(ask_charge_cmd)
-
+    # Add any actions
+    ld.add_action(load_carrier_cmd)
+    ld.add_action(unload_carrier_cmd)
+    ld.add_action(move_carrier_cmd)
+    ld.add_action(load_supply_cmd)  
+    ld.add_action(unload_valve_cmd)
+    ld.add_action(unload_tool_cmd)
+    ld.add_action(unload_bolt_cmd)
+    
     return ld
