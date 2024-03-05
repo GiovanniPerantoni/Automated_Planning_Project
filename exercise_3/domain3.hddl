@@ -42,6 +42,7 @@
 
   ;; TODO: convert the 3 supply tasks into an unique task
   ;; TODO: verify if it is necessary to have separate load methods
+  ;;          -> create load_box task
 
   ;; move robot ?r to location ?l
   (:task go_to
