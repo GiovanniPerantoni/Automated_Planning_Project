@@ -55,6 +55,16 @@
     :precondition ()
     :effect ()
   )
+  ;; unload the box ?b and its content ?v which it is a valve
+  (:task unload_valve_task
+    :parameters (
+      ?r - robot
+      ?v - valve
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
 
   ;; move robot ?r from location ?from to location ?to if they are connected
   (:method m_go_to_direct_connection
@@ -94,7 +104,7 @@
       (task0 (noop ?r ?l))
     )
   )
-  ;; load a box with 
+  ;; load the box ?b with supply ?s and load robot ?r with box ?b
   (:method m_load_method
     :parameters (
       ?r - robot
@@ -110,6 +120,26 @@
       (task1 (load_carrier ?r ?c ?b ?sp ?l))
     )
     ;; NOTE: ordering is important since we can't load a box before filling it
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload valve ?v from box ?b
+  (:method m_unload_valve
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?v - valve
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_valve_task ?r ?v ?w)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task1 (unload_valve ?r ?b ?v ?l ?w))
+    )
     :ordering (and
       (task0 < task1)
     )
