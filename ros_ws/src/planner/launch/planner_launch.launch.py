@@ -115,12 +115,12 @@ def generate_launch_description():
     ld.add_action(plansys2_cmd)
 
     # Add any actions
-    ld.add_action(load_carrier_cmd)
-    ld.add_action(unload_carrier_cmd)
+    # ld.add_action(load_carrier_cmd)
+    # ld.add_action(unload_carrier_cmd)
     ld.add_action(move_carrier_cmd)
-    ld.add_action(load_supply_cmd)  
-    ld.add_action(unload_valve_cmd)
-    ld.add_action(unload_tool_cmd)
-    ld.add_action(unload_bolt_cmd)
+    # ld.add_action(load_supply_cmd)  
+    # ld.add_action(unload_valve_cmd)
+    # ld.add_action(unload_tool_cmd)
+    # ld.add_action(unload_bolt_cmd)
     
     return ld
