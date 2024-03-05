@@ -67,7 +67,7 @@
     :effect ()
   )
   ;; unload the box ?b and its content ?bo which it is a bolt
-  (:task unload_valve_bolt
+  (:task unload_bolt_task
     :parameters (
       ?r - robot
       ?bo - bolt
