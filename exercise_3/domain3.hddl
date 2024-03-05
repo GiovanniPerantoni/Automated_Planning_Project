@@ -41,11 +41,17 @@
   )
 
   ;; TODO: convert the 3 supply tasks into an unique task
-  ;; TODO: find a way to create a method to bring a robot in a certain location
+  ;; TODO: verify if it is necessary to have separate load methods
 
   ;; move robot ?r to location ?l
   (:task go_to
     :parameters (?r - robot ?l - location)
+    :precondition ()
+    :effect ()
+  )
+  ;; prepare robot ?r loading box ?b and supply ?s
+  (:task load_task
+    :parameters (?r - robot ?b - box ?s - supply)
     :precondition ()
     :effect ()
   )
@@ -86,6 +92,26 @@
     :task (go_to ?r ?l)
     :subtasks (and
       (task0 (noop ?r ?l))
+    )
+  )
+  ;; load a box with 
+  (:method m_load_method
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (load_supply ?r ?l ?b ?s))
+      (task1 (load_carrier ?r ?c ?b ?sp ?l))
+    )
+    ;; NOTE: ordering is important since we can't load a box before filling it
+    :ordering (and
+      (task0 < task1)
     )
   )
 
