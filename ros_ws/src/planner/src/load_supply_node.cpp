@@ -12,7 +12,7 @@ class LoadSupply : public plansys2::ActionExecutorClient
 {
 public:
   LoadSupply()
-  : plansys2::ActionExecutorClient("LoadSupply", 1s)
+  : plansys2::ActionExecutorClient("load_supply", 1s)
   {
     progress_ = 0.0;
   }
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   rclcpp::init(argc, argv);
   auto node = std::make_shared<LoadSupply>();
 
-  node->set_parameter(rclcpp::Parameter("action_name", "LoadSupply"));
+  node->set_parameter(rclcpp::Parameter("action_name", "load_suppy"));
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
 
   rclcpp::spin(node->get_node_base_interface());

@@ -12,7 +12,7 @@ class MoveCarrier : public plansys2::ActionExecutorClient
 {
 public:
   MoveCarrier()
-  : plansys2::ActionExecutorClient("MoveCarrier", 1s)
+  : plansys2::ActionExecutorClient("move_carrier", 5s)
   {
     progress_ = 0.0;
   }

@@ -12,7 +12,7 @@ class UnloadBolt : public plansys2::ActionExecutorClient
 {
 public:
   UnloadBolt()
-  : plansys2::ActionExecutorClient("UnloadBolt", 1s)
+  : plansys2::ActionExecutorClient("unload_bolt", 2s)
   {
     progress_ = 0.0;
   }
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
   rclcpp::init(argc, argv);
   auto node = std::make_shared<UnloadBolt>();
 
-  node->set_parameter(rclcpp::Parameter("action_name", "UnloadBolt"));
+  node->set_parameter(rclcpp::Parameter("action_name", "unload_bolt"));
   node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
 
   rclcpp::spin(node->get_node_base_interface());
