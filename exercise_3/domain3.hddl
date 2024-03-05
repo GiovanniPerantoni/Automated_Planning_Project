@@ -76,6 +76,16 @@
     :precondition ()
     :effect ()
   )
+  ;; unload the box ?b and its content ?t which it is a tool
+  (:task unload_tool_task
+    :parameters (
+      ?r - robot
+      ?t - tool
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
 
   ;; move robot ?r from location ?from to location ?to if they are connected
   (:method m_go_to_direct_connection
@@ -170,6 +180,26 @@
     :subtasks (and
       (task0 (unload_carrier ?r ?c ?b ?s ?l))
       (task1 (unload_bolt ?r ?b ?bo ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload tool ?t from box ?b
+  (:method m_unload_tool
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_tool_task ?r ?t ?w)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task1 (unload_tool ?r ?b ?t ?l ?w))
     )
     :ordering (and
       (task0 < task1)
