@@ -80,7 +80,6 @@
   (:task unload_tool_task
     :parameters (
       ?r - robot
-      ?t - tool
       ?w - workstation
     )
     :precondition ()
@@ -196,7 +195,7 @@
       ?w - workstation
       ?l - location 
     )
-    :task (unload_tool_task ?r ?t ?w)
+    :task (unload_tool_task ?r ?w)
     :subtasks (and
       (task0 (unload_carrier ?r ?c ?b ?s ?l))
       (task1 (unload_tool ?r ?b ?t ?l ?w))
