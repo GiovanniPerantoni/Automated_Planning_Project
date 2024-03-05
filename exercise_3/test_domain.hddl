@@ -1,4 +1,4 @@
-(define (domain logistic_planning_3)
+(define (domain test_domain)
   (:requirements :typing :hierachie)
 
   (:types
@@ -8,7 +8,7 @@
   (:predicates
     (has_valve ?w - workstation) ; workstation ?w has a valve
     ;; (has_bolt ?w - workstation) ; workstation ?w has a bolt
-    ;; (has_tool ?w - workstation) ; workstation ?w has a tool 
+    (has_tool ?w - workstation) ; workstation ?w has a tool 
   )
 
   (:task dummy_task
@@ -16,19 +16,24 @@
     :precondition ()
     :effect ()
   )
+  (:task dummy_task2
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )  
 
   (:method dummy_method
     :parameters (?w - workstation)
     :task (dummy_task ?w)
     :subtasks (and
-        (task0 dummy_action ?w)
+        (task0 (dummy_action ?w))
     )
   )
   (:method dummy_method2
     :parameters (?w - workstation)
-    :task (dummy_task ?w)
+    :task (dummy_task2 ?w)
     :subtasks (and
-        (task0 dummy_action2 ?w)
+        (task0 (dummy_action2 ?w))
     )
   )
 
@@ -43,9 +48,53 @@
   )
   (:action dummy_action2
     :parameters (?w - workstation)
-    :precondition ()
-    :effect (and
-      (not (has_valve ?w))
-    )
+    :precondition (has_tool ?w)
+    :effect (not (has_tool ?w))
   )
 )
+
+;; ===================================================================
+
+; (define (domain test_domain)
+;   (:types
+;     location - object
+;     target - object
+;     locatable - object
+;     vehicle - locatable
+;     package - locatable
+;     capacity_number - object
+;   )
+;   (:predicates
+;     (road ?arg0 - location ?arg1 - location)
+;     (at ?arg0 - locatable ?arg1 - location)
+;     (in ?arg0 - package ?arg1 - vehicle)
+;     (capacity ?arg0 - vehicle ?arg1 - capacity_number)
+;     (capacity_predecessor ?arg0 - capacity_number ?arg1 - capacity_number)
+;   )
+
+;   ;; TASKS
+;   (:task get_to
+;     :parameters (?v - vehicle ?l - location)
+;     :precondition ()
+;     :effect ()
+;   )
+
+;   ;; METHODS
+;   (:method m_i_am_there_ordering_0
+;     :parameters (?l - location ?v - vehicle)
+;     :task (get_to ?v ?l)
+;     :subtasks (and
+;       (task0 (noop ?v ?l))
+;     )
+;   )
+
+;   ;; ACTIONS
+;   (:action noop
+;       :parameters (?v - vehicle ?l2 - location)
+;       :precondition (and 
+;         (at ?v ?l2)
+;       )
+;       :effect ()
+;   )
+  
+; )
