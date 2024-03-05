@@ -42,6 +42,7 @@
 
   ;; TODO: convert the 3 supply tasks into an unique task
   ;; TODO: verify if it is necessary to have separate load methods
+  ;;          -> create load_box task
 
   ;; move robot ?r to location ?l
   (:task go_to
@@ -59,7 +60,24 @@
   (:task unload_valve_task
     :parameters (
       ?r - robot
-      ?v - valve
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b and its content ?bo which it is a bolt
+  (:task unload_bolt_task
+    :parameters (
+      ?r - robot
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b and its content ?t which it is a tool
+  (:task unload_tool_task
+    :parameters (
+      ?r - robot
       ?w - workstation
     )
     :precondition ()
@@ -135,10 +153,50 @@
       ?w - workstation
       ?l - location 
     )
-    :task (unload_valve_task ?r ?v ?w)
+    :task (unload_valve_task ?r ?w)
     :subtasks (and
       (task0 (unload_carrier ?r ?c ?b ?s ?l))
       (task1 (unload_valve ?r ?b ?v ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload bolt ?bo from box ?b
+  (:method m_unload_bolt
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?bo - bolt
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_bolt_task ?r ?w)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task1 (unload_bolt ?r ?b ?bo ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload tool ?t from box ?b
+  (:method m_unload_tool
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_tool_task ?r ?w)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task1 (unload_tool ?r ?b ?t ?l ?w))
     )
     :ordering (and
       (task0 < task1)
