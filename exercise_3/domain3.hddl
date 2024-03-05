@@ -60,7 +60,6 @@
   (:task unload_valve_task
     :parameters (
       ?r - robot
-      ?v - valve
       ?w - workstation
     )
     :precondition ()
@@ -70,7 +69,6 @@
   (:task unload_bolt_task
     :parameters (
       ?r - robot
-      ?bo - bolt
       ?w - workstation
     )
     :precondition ()
@@ -155,7 +153,7 @@
       ?w - workstation
       ?l - location 
     )
-    :task (unload_valve_task ?r ?v ?w)
+    :task (unload_valve_task ?r ?w)
     :subtasks (and
       (task0 (unload_carrier ?r ?c ?b ?s ?l))
       (task1 (unload_valve ?r ?b ?v ?l ?w))
@@ -175,7 +173,7 @@
       ?w - workstation
       ?l - location 
     )
-    :task (unload_bolt_task ?r ?bo ?w)
+    :task (unload_bolt_task ?r ?w)
     :subtasks (and
       (task0 (unload_carrier ?r ?c ?b ?s ?l))
       (task1 (unload_bolt ?r ?b ?bo ?l ?w))
