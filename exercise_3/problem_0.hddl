@@ -28,19 +28,19 @@
       ; (task2 (load_task robot2 box3 tool2))
 
       ;; UNLOADING TESTING
-      ; (task0 (load_task robot1 box1 valve1))
-      ; (task1 (load_task robot1 box2 valve2))
-      ; (task2 (go_to robot1 location1))
-      ; (task3 (unload_valve_task robot1 valve1 workstation1))
-      ; (task4 (go_to robot1 location2))
-      ; (task5 (unload_valve_task robot1 valve2 workstation3))
+      (task0 (load_task robot1 box1 valve1))
+      (task1 (load_task robot1 box2 bolt1))
+      (task2 (go_to robot1 location1))
+      (task3 (unload_valve_task robot1 valve1 workstation1))
+      (task4 (go_to robot1 location2))
+      (task5 (unload_bolt_task robot1 bolt1 workstation3))
     )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
       (task3 < task4)
-      ; (task4 < task5)
+      (task4 < task5)
     )
   )
 
