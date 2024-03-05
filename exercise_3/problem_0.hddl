@@ -34,6 +34,9 @@
       (task3 (unload_valve_task robot1 valve1 workstation1))
       (task4 (go_to robot1 location2))
       (task5 (unload_bolt_task robot1 bolt1 workstation3))
+      (task6 (load_task robot2 box3 tool2))
+      (task7 (go_to robot2 location1))
+      (task8 (unload_tool_task robot2 tool2 workstation2))
     )
     :ordering (and
       (task0 < task1)
@@ -41,6 +44,9 @@
       (task2 < task3)
       (task3 < task4)
       (task4 < task5)
+      (task5 < task6)
+      (task6 < task7)
+      (task7 < task8)
     )
   )
 
