@@ -43,237 +43,60 @@
   ;; TODO: convert the 3 supply tasks into an unique task
   ;; TODO: find a way to create a method to bring a robot in a certain location
 
-  (:task pick_up
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?sp - space 
-      ?s - supply 
-      ?l - location
-    )
-    :precondition ()
-    :effect ()
-  )
-  (:task get_to
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?from - location 
-      ?to - location
-    )
-    :precondition ()
-    :effect ()
-  )
-  (:task deliver_valve
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?v - valve 
-      ?w - workstation 
-      ?l - location
-    )
-    :precondition ()
-    :effect ()
-  )
-  (:task deliver_bolt
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?bo - bolt 
-      ?w - workstation 
-      ?l - location
-    )
-    :precondition ()
-    :effect ()
-  )
-  (:task deliver_tool
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?t - tool 
-      ?w - workstation 
-      ?l - location
-    )
-    :precondition ()
-    :effect ()
-  )
-  (:task valve_in_workstation
-    :parameters (?v - valve ?w - workstation)
-    :precondition ()
-    :effect ()
-  )
-  (:task bolt_in_workstation
-    :parameters (?bo - bolt ?w - workstation)
-    :precondition ()
-    :effect ()
-  )
-  (:task tool_in_workstation
-    :parameters (?t - tool ?w - workstation)
+  ;; move robot ?r to location ?l
+  (:task go_to
+    :parameters (?r - robot ?l - location)
     :precondition ()
     :effect ()
   )
 
-  (:method m_prepare_robot
+  ;; move robot ?r from location ?from to location ?to if they are connected
+  (:method m_go_to_direct_connection
     :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?sp - space 
-      ?s - supply 
-      ?l - location
-    )
-    :task (pick_up ?r ?c ?b ?sp ?s ?l)
-    :subtasks (and
-      (task0 (load_carrier ?r ?c ?b ?sp ?l))
-      (task1 (load_supply ?r ?l ?b ?s))
-    )
-    :ordering (and
-      (task0 < task1)
-    )
-  )
-  (:method m_move
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?from - location 
+      ?r - robot
+      ?c - carrier
+      ?from - location
       ?to - location
     )
-    :task (get_to ?r ?c ?from ?to)
+    :task (go_to ?r ?to)
     :subtasks (and
       (task0 (move_carrier ?r ?c ?from ?to))
     )
   )
-  (:method m_unload_valve
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?v - valve 
-      ?w - workstation 
-      ?l - location
-    )
-    :task (deliver_valve ?r ?c ?b ?s ?v ?w ?l)
-    :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
-      (task1 (unload_valve ?r ?b ?v ?l ?w))
-    )
-    :ordering (and
-      (task0 < task1)
-    )
-  )
-  (:method m_unload_bolt
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?bo - bolt 
-      ?w - workstation 
-      ?l - location
-    )
-    :task (deliver_bolt ?r ?c ?b ?s ?bo ?w ?l)
-    :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
-      (task1 (unload_bolt ?r ?b ?bo ?l ?w))
-    )
-    :ordering (and
-      (task0 < task1)
-    )
-  )
-  (:method m_unload_tool
-    :parameters (
-      ?r - robot 
-      ?c - carrier 
-      ?b - box 
-      ?s - space 
-      ?t - tool 
-      ?w - workstation 
-      ?l - location
-    )
-    :task (deliver_tool ?r ?c ?b ?s ?t ?w ?l)
-    :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
-      (task1 (unload_tool ?r ?b ?t ?l ?w))
-    )
-    :ordering (and
-      (task0 < task1)
-    )
-  )
-  (:method m_deliver_valve
+  ;; recursive method used if ?from and ?to are not connected
+  (:method m_go_to
     :parameters (
       ?r - robot
       ?c - carrier
-      ?b - box
-      ?sp - space
-      ?v - valve
-      ?w - workstation
       ?from - location
       ?to - location
     )
-    :task (valve_in_workstation ?v ?w)
+    :task (go_to ?r ?to)
     :subtasks (and
-      (task0 (pick_up ?r ?c ?b ?sp ?v ?from))
-      (task1 (get_to ?r ?c ?from ?to))
-      (task2 (deliver_valve ?r ?c ?b ?sp ?v ?w ?to))
+      (task0 (go_to ?r ?from))
+      (task1 (move_carrier ?r ?c ?from ?to))
     )
     :ordering (and
       (task0 < task1)
-      (task1 < task2)
     )
   )
-  (:method m_deliver_bolt
-    :parameters (
-      ?r - robot
-      ?c - carrier
-      ?b - box
-      ?sp - space
-      ?bo - bolt
-      ?w - workstation
-      ?from - location
-      ?to - location
-    )
-    :task (bolt_in_workstation ?bo ?w)
+  ;; base method used if the robot is already at location
+  (:method m_go_to_trivial
+    :parameters (?r - robot ?l - location)
+    :task (go_to ?r ?l)
     :subtasks (and
-      (task0 (pick_up ?r ?c ?b ?sp ?bo ?from))
-      (task1 (get_to ?r ?c ?from ?to))
-      (task2 (deliver_bolt ?r ?c ?b ?sp ?bo ?w ?to))
-    )
-    :ordering (and
-      (task0 < task1)
-      (task1 < task2)
-    )
-  )
-  (:method m_deliver_tool
-    :parameters (
-      ?r - robot
-      ?c - carrier
-      ?b - box
-      ?sp - space
-      ?t - tool
-      ?w - workstation
-      ?from - location
-      ?to - location
-    )
-    :task (tool_in_workstation ?t ?w)
-    :subtasks (and
-      (task0 (pick_up ?r ?c ?b ?sp ?t ?from))
-      (task1 (get_to ?r ?c ?from ?to))
-      (task2 (deliver_tool ?r ?c ?b ?sp ?t ?w ?to))
-    )
-    :ordering (and
-      (task0 < task1)
-      (task1 < task2)
+      (task0 (noop ?r ?l))
     )
   )
 
+  ;; Recursion termination
+  (:action noop
+    :parameters (?r - robot ?l - location)
+    :precondition (and 
+      (robot_at_loc ?r ?l)
+    )
+    :effect ()
+  )
   ;; moves a robot with its carrier to a new location
   (:action move_carrier
     :parameters (?r - robot ?c - carrier ?from ?to - location)
