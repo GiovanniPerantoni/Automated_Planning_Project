@@ -20,6 +20,7 @@ set instance s1 space
 set instance s2 space
 set instance s3 space
 set instance s4 space
+
 set predicate (connected location1 location2)
 set predicate (connected location2 location1)
 set predicate (connected warehouse_loc location1)
@@ -56,4 +57,5 @@ set predicate (supply_available bolt1)
 set predicate (supply_available bolt2)
 set predicate (supply_available tool1)
 set predicate (supply_available tool2)
-set goal(and(robot_at_loc robot1 warehouse_loc)(robot_at_loc robot2 warehouse_loc)(has_valve workstation1)(has_bolt workstation1)(has_tool workstation1)(has_valve workstation2)(has_bolt workstation2)(has_tool workstation2))
+
+set goal (and(robot_at_loc robot1 warehouse_loc))
