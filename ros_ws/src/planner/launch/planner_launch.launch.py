@@ -1,17 +1,3 @@
-# Copyright 2019 Intelligent Robotics Lab
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -43,67 +29,121 @@ def generate_launch_description():
           'namespace': namespace
           }.items())
 
-    # load_carrier_node
-    # unload_carrier_node
-    # move_carrier_node
-    # load_supply_node
-    # unload_bolt_node
-    # unload_valve_node
-    # unload_tool_node
 
-    # Specify the actions
-    load_carrier_cmd = Node(
+    # Specify the actions for robot1
+    load_carrier1_cmd = Node(
         package='planner',
         executable='load_carrier_node',
-        name='load_carrier_node',
+        name='load_carrier_node1',
         namespace=namespace,
         output='screen',
-        parameters=[])
+        parameters=["duration:=5.0"])
     
-    unload_carrier_cmd = Node(
+    unload_carrier1_cmd = Node(
         package='planner',
         executable='unload_carrier_node',
-        name='unload_carrier_node',
+        name='unload_carrier_node1',
         namespace=namespace,
         output='screen',
         parameters=[])
     
-    move_carrier_cmd = Node(
+    move_carrier1_cmd = Node(
         package='planner',
         executable='move_carrier_node',
-        name='move_carrier_node',
+        name='move_carrier_node1',
         namespace=namespace,
         output='screen',
         parameters=[])
     
-    load_supply_cmd = Node(
+    load_supply1_cmd = Node(
         package='planner',
         executable='load_supply_node',
-        name='load_supply_node',
+        name='load_supply_node1',
         namespace=namespace,
         output='screen',
-        parameters=[])
+        parameters=[{
+            "duration": 2.0
+            }])
     
-    unload_valve_cmd = Node(
+    unload_valve1_cmd = Node(
         package='planner',
         executable='unload_valve_node',
-        name='unload_valve_node',
+        name='unload_valve_node1',
         namespace=namespace,
         output='screen',
         parameters=[])
     
-    unload_tool_cmd = Node(
+    unload_tool1_cmd = Node(
         package='planner',
         executable='unload_tool_node',
-        name='unload_tool_node',
+        name='unload_tool_node1',
         namespace=namespace,
         output='screen',
         parameters=[])
 
-    unload_bolt_cmd = Node(
+    unload_bolt1_cmd = Node(
         package='planner',
         executable='unload_bolt_node',
-        name='unload_bolt_node',
+        name='unload_bolt_node1',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+    
+    # Specify the actions for robot2
+    load_carrier2_cmd = Node(
+        package='planner',
+        executable='load_carrier_node',
+        name='load_carrier_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=["duration:=5.0"])
+    
+    unload_carrier2_cmd = Node(
+        package='planner',
+        executable='unload_carrier_node',
+        name='unload_carrier_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+    
+    move_carrier2_cmd = Node(
+        package='planner',
+        executable='move_carrier_node',
+        name='move_carrier_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+    
+    load_supply2_cmd = Node(
+        package='planner',
+        executable='load_supply_node',
+        name='load_supply_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=[{
+            "duration": 2.0
+            }])
+    
+    unload_valve2_cmd = Node(
+        package='planner',
+        executable='unload_valve_node',
+        name='unload_valve_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+    
+    unload_tool2_cmd = Node(
+        package='planner',
+        executable='unload_tool_node',
+        name='unload_tool_node2',
+        namespace=namespace,
+        output='screen',
+        parameters=[])
+
+    unload_bolt2_cmd = Node(
+        package='planner',
+        executable='unload_bolt_node',
+        name='unload_bolt_node2',
         namespace=namespace,
         output='screen',
         parameters=[])
@@ -114,13 +154,22 @@ def generate_launch_description():
     # Declare the launch options
     ld.add_action(plansys2_cmd)
 
-    # Add any actions
-    # ld.add_action(load_carrier_cmd)
-    # ld.add_action(unload_carrier_cmd)
-    ld.add_action(move_carrier_cmd)
-    # ld.add_action(load_supply_cmd)  
-    # ld.add_action(unload_valve_cmd)
-    # ld.add_action(unload_tool_cmd)
-    # ld.add_action(unload_bolt_cmd)
+    # Add nodes for robot1
+    ld.add_action(load_carrier1_cmd)
+    ld.add_action(unload_carrier1_cmd)
+    ld.add_action(move_carrier1_cmd)
+    ld.add_action(load_supply1_cmd)  
+    ld.add_action(unload_valve1_cmd)
+    ld.add_action(unload_tool1_cmd)
+    ld.add_action(unload_bolt1_cmd)
+    
+    # Add nodes for robot2
+    ld.add_action(load_carrier2_cmd)
+    ld.add_action(unload_carrier2_cmd)
+    ld.add_action(move_carrier2_cmd)
+    ld.add_action(load_supply2_cmd)  
+    ld.add_action(unload_valve2_cmd)
+    ld.add_action(unload_tool2_cmd)
+    ld.add_action(unload_bolt2_cmd)
     
     return ld

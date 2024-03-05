@@ -12,7 +12,8 @@ class MoveCarrier : public plansys2::ActionExecutorClient
 {
 public:
   MoveCarrier()
-  : plansys2::ActionExecutorClient("move_carrier", 5s)
+  // (1/10ms) * 0.02 = 5sec
+  : plansys2::ActionExecutorClient("move_carrier", 10ms)
   {
     progress_ = 0.0;
   }
@@ -21,7 +22,7 @@ private:
   void do_work()
   {
     if (progress_ < 1.0) {
-      progress_ += 0.05;
+      progress_ += 0.01;
       send_feedback(progress_, "MoveCarrier running");
     } else {
       finish(true, 1.0, "MoveCarrier completed");
