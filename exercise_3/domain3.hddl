@@ -43,6 +43,7 @@
 
   ;; TODO: implement possibility to load a robot with multiple crates
   ;; TODO: test with multiple deliveries
+  ;; TODO?: remove redundant unload tasks (probabily unneded)
 
 
   ;; move robot ?r to location ?l
@@ -66,6 +67,15 @@
   ;; prepare robot ?r loading box ?b and supply ?s
   (:task load_task
     :parameters (?r - robot ?b - box ?s - supply)
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b from robot ?r
+  (:task unload_box_task
+    :parameters (
+      ?r - robot
+      ?b - box
+    )
     :precondition ()
     :effect ()
   )
@@ -198,6 +208,42 @@
     ;; NOTE: ordering is important since we can't load a box before filling it
     :ordering (and
       (task0 < task1)
+    )
+  )
+  ;; load the box ?b, which is already on the robot, with supply ?s
+  (:method m_load_method_box
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (unload_box_task ?r ?b))
+      (task1 (load_supply_task ?r ?b ?s))
+      (task2 (load_box_task ?r ?b))
+    )
+    ;; NOTE: ordering is important since we can't load a box before filling it
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+    )
+  )
+  ;; unload box ?b from robot ?r
+  (:method m_unload_box
+    :parameters (
+      ?r - robot 
+      ?c - carrier 
+      ?b - box 
+      ?sp - space 
+      ?l - location
+    )
+    :task (unload_box_task ?r ?b)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?sp ?l))
     )
   )
   ;; unload box ?b from robot ?r and unload valve ?v from box ?b
@@ -333,6 +379,33 @@
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a tool and picks up the box afterwards
+  (:method m_deliver_tool_pick_box
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_tool ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?t))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_tool_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+      (task3 < task4)
     )
   )
 
