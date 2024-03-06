@@ -41,8 +41,7 @@
   )
 
 
-  ;; TODO: implement possibility to load a robot with multiple crates
-  ;; TODO: test with multiple deliveries
+  ;; TODO: implement possibility to load a robot with multiple crates => RECURSIVE
   ;; TODO?: remove redundant unload tasks (probabily unneded)
 
 
