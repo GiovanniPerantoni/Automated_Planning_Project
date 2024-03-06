@@ -3,7 +3,7 @@
 
   (:types
     location - object ; can contain workstations robots and boxes
-    warehouse - location ; contains supplies
+    ;; warehouse - location ; contains supplies
     workstation - object ; can get boxes and contain supplies
     robot - object ; can pick up boxes, fill them, unload them and move between locations
     carrier - location ; contains boxes if it has free spaces
@@ -40,9 +40,13 @@
     (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
   )
 
+
   ;; TODO: convert the 3 supply tasks into an unique task
   ;; TODO: verify if it is necessary to have separate load methods
   ;;          -> create load_box task
+  ;; TODO: implement possibility to load a robot with multiple crates
+  ;; TODO: test with multiple deliveries
+
 
   ;; move robot ?r to location ?l
   (:task go_to
@@ -80,6 +84,24 @@
       ?r - robot
       ?w - workstation
     )
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a valve to workstation ?w
+  (:task deliver_valve
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a bolt to workstation ?w
+  (:task deliver_bolt
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a tool to workstation ?w
+  (:task deliver_tool
+    :parameters (?w - workstation)
     :precondition ()
     :effect ()
   )
@@ -200,6 +222,81 @@
     )
     :ordering (and
       (task0 < task1)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a valve
+  (:method m_deliver_valve
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?v - valve
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_valve ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?v))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_valve_task ?r ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a bolt
+  (:method m_deliver_bolt
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?bo - bolt
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_bolt ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?bo))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_bolt_task ?r ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a tool
+  (:method m_deliver_tool
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_tool ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?t))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_tool_task ?r ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
     )
   )
 
