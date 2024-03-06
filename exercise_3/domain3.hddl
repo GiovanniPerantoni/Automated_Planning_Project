@@ -43,6 +43,7 @@
 
   ;; TODO: implement possibility to load a robot with multiple crates => RECURSIVE
   ;; TODO?: remove redundant unload tasks (probabily unneded)
+  ;; TODO: verify that the long planning times are not due to errors
 
 
   ;; move robot ?r to location ?l
@@ -209,29 +210,8 @@
       (task0 < task1)
     )
   )
-  ; ;; recursive verision of m_load_method (allows multiple boxes to be loaded onto a robot)
-  ; (:method m_load_method_recursive
-  ;   :parameters (
-  ;     ?r - robot
-  ;     ?c - carrier
-  ;     ?b - box
-  ;     ?sp - space
-  ;     ?s - supply
-  ;     ?l - location
-  ;   )
-  ;   :task (load_task ?r ?b ?s)
-  ;   :subtasks (and
-  ;     (task0 (load_task ?r ?b ?s))
-  ;     (task1 (load_supply_task ?r ?b ?s))
-  ;     (task2 (load_box_task ?r ?b))
-  ;   )
-  ;   :ordering (and
-  ;     (task0 < task1)
-  ;     (task1 < task2)
-  ;   )
-  ; )
   ;; load the box ?b, which is already on the robot, with supply ?s
-  (:method m_load_method_box
+  (:method m_load_method_with_box
     :parameters (
       ?r - robot
       ?c - carrier
@@ -246,7 +226,27 @@
       (task1 (load_supply_task ?r ?b ?s))
       (task2 (load_box_task ?r ?b))
     )
-    ;; NOTE: ordering is important since we can't load a box before filling it
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+    )
+  )
+  ;; recursive verision of m_load_method (allows multiple boxes to be loaded onto a robot)
+  (:method m_load_method_recursive
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (load_task ?r ?b ?s))
+      (task1 (load_supply_task ?r ?b ?s))
+      (task2 (load_box_task ?r ?b))
+    )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
