@@ -8,8 +8,8 @@
     workstation1 workstation2 workstation3 - workstation
     ; warehouse1 - warehouse
     box1 box2 box3 - box
-    valve1 valve2 - valve
-    bolt1 bolt2 - bolt
+    valve1 valve2 valve3 - valve
+    bolt1 bolt2 bolt3 - bolt
     tool1 tool2 - tool
     carrier1 carrier2 - carrier
     space1 space2 space3 - space
@@ -45,17 +45,24 @@
       ; (task4 (unload_tool_task robot1 workstation3))
 
       ;; DELIVERING TESTING
+      ; (task0 (deliver_valve workstation1))
+      ; (task1 (deliver_bolt workstation1))
+      ; (task2 (deliver_tool workstation1))
+      
+      ;; DELIVERING WITH BOX PICKUP TESTING
       (task0 (deliver_valve workstation1))
-      (task1 (deliver_tool workstation3))
-      (task2 (deliver_bolt workstation2))
+      (task1 (deliver_bolt workstation1))
+      (task2 (deliver_tool workstation1))
       (task3 (deliver_valve workstation2))
+      (task4 (deliver_tool workstation3))
+      (task5 (deliver_bolt workstation3))
     )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
-    ;   (task3 < task4)
-    ;   (task4 < task5)
+      (task3 < task4)
+      (task4 < task5)
     ;   (task5 < task6)
     ;   (task6 < task7)
     ;   (task7 < task8)
@@ -95,15 +102,19 @@
     ;; supplies location
     (supply_at_loc valve1 warehouse_loc)
     (supply_at_loc valve2 warehouse_loc)
+    (supply_at_loc valve3 warehouse_loc)
     (supply_at_loc bolt1 warehouse_loc)
     (supply_at_loc bolt2 warehouse_loc)
+    (supply_at_loc bolt3 warehouse_loc)
     (supply_at_loc tool1 warehouse_loc)
     (supply_at_loc tool2 warehouse_loc)
     ;; supplies availability
     (supply_available valve1)
     (supply_available valve2)
+    (supply_available valve3)
     (supply_available bolt1)
     (supply_available bolt2)
+    (supply_available bolt3)
     (supply_available tool1)
     (supply_available tool2)
   )
