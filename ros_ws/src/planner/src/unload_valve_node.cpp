@@ -10,18 +10,18 @@ using namespace std::chrono_literals;
 class UnloadValve : public plansys2::ActionExecutorClient {
  public:
   double duration;
-  const double increment = 0.02;
+  
   UnloadValve()
       : plansys2::ActionExecutorClient(
             "unload_valve",
-            std::chrono::milliseconds((int)(increment * 1000 / duration))) {
+            100ms) {
     progress_ = 0.0;
   }
 
  private:
   void do_work() {
     if (progress_ < 1.0) {
-      progress_ += increment;
+      progress_ += 1 / (duration * 1000 / 100);
       send_feedback(progress_, "UnloadValve running");
     } else {
       finish(true, 1.0, "UnloadValve completed");

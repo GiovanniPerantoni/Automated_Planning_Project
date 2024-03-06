@@ -107,6 +107,8 @@ def generate_launch_description():
             "duration": UNLOAD_BOLT_DURATION
         }])
 
+    ################################
+
     # Specify the actions for robot2
     load_carrier2_cmd = Node(
         package='planner',

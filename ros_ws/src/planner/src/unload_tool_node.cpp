@@ -10,18 +10,15 @@ using namespace std::chrono_literals;
 class UnloadTool : public plansys2::ActionExecutorClient {
  public:
   double duration;
-  const double increment = 0.02;
-  UnloadTool()
-      : plansys2::ActionExecutorClient(
-            "unload_tool",
-            std::chrono::milliseconds((int)(increment * 1000 / duration))) {
+
+  UnloadTool() : plansys2::ActionExecutorClient("unload_tool", 100ms) {
     progress_ = 0.0;
   }
 
  private:
   void do_work() {
     if (progress_ < 1.0) {
-      progress_ += increment;
+      progress_ += 1 / (duration * 1000 / 100);
       send_feedback(progress_, "UnloadTool running");
     } else {
       finish(true, 1.0, "UnloadTool completed");

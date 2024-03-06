@@ -10,18 +10,15 @@ using namespace std::chrono_literals;
 class MoveCarrier : public plansys2::ActionExecutorClient {
  public:
   double duration;
-  const double increment = 0.02;
-  MoveCarrier()
-      : plansys2::ActionExecutorClient(
-            "move_carrier",
-            std::chrono::milliseconds((int)(increment * 1000 / duration))) {
+
+  MoveCarrier() : plansys2::ActionExecutorClient("move_carrier", 100ms) {
     progress_ = 0.0;
   }
 
  private:
   void do_work() {
     if (progress_ < 1.0) {
-      progress_ += increment;
+      progress_ += 1 / (duration * 1000 / 100);
       send_feedback(progress_, "MoveCarrier running");
     } else {
       finish(true, 1.0, "MoveCarrier completed");
