@@ -7,11 +7,10 @@
 
 using namespace std::chrono_literals;
 
-double duration;
-
 class LoadSupply : public plansys2::ActionExecutorClient {
  public:
-  const float increment = 0.02;
+  double duration;
+  const double increment = 0.02;
   LoadSupply()
       : plansys2::ActionExecutorClient(
             "load_supply",
@@ -42,8 +41,8 @@ class LoadSupply : public plansys2::ActionExecutorClient {
 int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<LoadSupply>();
-  duration = node->get_parameter("duration").as_double();
-
+  node->declare_parameter("duration", 1.0);
+  node->duration = node->get_parameter("duration").as_double();
   node->set_parameter(rclcpp::Parameter("action_name", "load_suppy"));
   node->trigger_transition(
       lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
