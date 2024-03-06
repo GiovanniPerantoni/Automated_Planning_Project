@@ -259,7 +259,7 @@
     )
     :task (unload_valve_task ?r ?w)
     :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task0 (unload_box_task ?r ?b))
       (task1 (unload_valve ?r ?b ?v ?l ?w))
     )
     :ordering (and
@@ -279,7 +279,7 @@
     )
     :task (unload_bolt_task ?r ?w)
     :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task0 (unload_box_task ?r ?b))
       (task1 (unload_bolt ?r ?b ?bo ?l ?w))
     )
     :ordering (and
@@ -299,7 +299,7 @@
     )
     :task (unload_tool_task ?r ?w)
     :subtasks (and
-      (task0 (unload_carrier ?r ?c ?b ?s ?l))
+      (task0 (unload_box_task ?r ?b))
       (task1 (unload_tool ?r ?b ?t ?l ?w))
     )
     :ordering (and
