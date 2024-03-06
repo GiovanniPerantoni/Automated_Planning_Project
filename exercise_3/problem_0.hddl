@@ -47,17 +47,19 @@
       ;; DELIVERING TESTING
       (task0 (deliver_valve workstation1))
       (task1 (deliver_tool workstation3))
+      (task2 (deliver_bolt workstation2))
+      ; (task3 (deliver_valve workstation2))
     )
-    ; :ordering (and
-    ;   (task0 < task1)
-    ;   (task1 < task2)
-    ;   (task2 < task3)
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      ; (task2 < task3)
     ;   (task3 < task4)
     ;   (task4 < task5)
     ;   (task5 < task6)
     ;   (task6 < task7)
     ;   (task7 < task8)
-    ; )
+    )
   )
 
   (:init
