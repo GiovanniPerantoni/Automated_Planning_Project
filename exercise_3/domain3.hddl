@@ -344,11 +344,13 @@
       (task1 (load_task ?r ?b ?v))
       (task2 (go_to ?r ?l))
       (task3 (unload_valve_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
     )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
+      (task3 < task4)
     )
   )
   ;; wrapper method that executes a full delivery of a bolt
@@ -369,40 +371,17 @@
       (task1 (load_task ?r ?b ?bo))
       (task2 (go_to ?r ?l))
       (task3 (unload_bolt_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
     )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
+      (task3 < task4)
     )
   )
   ;; wrapper method that executes a full delivery of a tool
   (:method m_deliver_tool
-    :parameters (
-      ?r - robot
-      ?c - carrier
-      ?b - box
-      ?s - space
-      ?t - tool
-      ?w - workstation
-      ?wh - location
-      ?l - location
-    )
-    :task (deliver_tool ?w)
-    :subtasks (and
-      (task0 (go_to ?r ?wh))
-      (task1 (load_task ?r ?b ?t))
-      (task2 (go_to ?r ?l))
-      (task3 (unload_tool_task ?r ?w))
-    )
-    :ordering (and
-      (task0 < task1)
-      (task1 < task2)
-      (task2 < task3)
-    )
-  )
-  ;; wrapper method that executes a full delivery of a tool and picks up the box afterwards
-  (:method m_deliver_tool_pick_box
     :parameters (
       ?r - robot
       ?c - carrier
