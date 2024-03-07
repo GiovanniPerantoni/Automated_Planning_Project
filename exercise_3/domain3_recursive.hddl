@@ -1,0 +1,544 @@
+(define (domain logistic_planning_3)
+  (:requirements :typing :hierachie)
+
+  (:types
+    location - object ; can contain workstations robots and boxes
+    ;; warehouse - location ; contains supplies
+    workstation - object ; can get boxes and contain supplies
+    robot - object ; can pick up boxes, fill them, unload them and move between locations
+    carrier - location ; contains boxes if it has free spaces
+    space - object ; determines how many spaces a carrier has
+    box - object ; can contain supplies
+    supply - object ; required by workstations
+    valve - supply ; type of supply
+    bolt - supply ; type of supply
+    tool - supply ; type of supply
+  )
+
+  (:predicates
+    ;; locations
+    (connected ?l1 ?l2 - location) ; location ?l1 is connected to location ?l2
+    ;; boxes
+    (box_at_loc ?b - box ?l - location) ; box ?b is in the location ?l
+    (box_empty ?b - box) ; box ?b is empty
+    (box_full ?b - box) ; box ?b is full
+    (supply_in_box ?s - supply ?b - box) ; supply ?s is in box ?b
+    ;; robots
+    (robot_at_loc ?r - robot ?l - location) ; robot ?r is at location ?l
+    (robot_has_carrier ?r - robot ?c - carrier) ; robot ?r has carrier ?c
+    ;; workstations
+    (ws_at_loc ?w - workstation ?l - location) ; workstation ?w is at location ?l
+    ;; (ws_contains ?w - workstation ?s - supply) ; workstation ?w contains supply ?s
+    (has_valve ?w - workstation) ; workstation ?w has a valve
+    (has_bolt ?w - workstation) ; workstation ?w has a bolt
+    (has_tool ?w - workstation) ; workstation ?w has a tool 
+    (supply_available ?s - supply) ; supply ?s is available
+    ;; supplies
+    (supply_at_loc ?s - supply ?l - location) ; supply ?s is at location ?l
+    ;; carrier space
+    (free ?c - carrier ?s - space) ; space ?s is not used carrier ?c
+    (occupied ?c - carrier ?s - space) ; space ?s is used by carrier ?c
+  )
+
+
+  ;; TODO: implement possibility to load a robot with multiple crates => RECURSIVE
+  ;; TODO?: remove redundant unload tasks (probabily unneded)
+
+
+  ;; move robot ?r to location ?l
+  (:task go_to
+    :parameters (?r - robot ?l - location)
+    :precondition ()
+    :effect ()
+  )
+  ;; use robot ?r to load box ?b with supply ?s
+  (:task load_supply_task
+    :parameters (?r - robot ?b - box ?s - supply)
+    :precondition ()
+    :effect ()
+  )
+  ;; load robot ?r with box ?b
+  (:task load_box_task
+    :parameters (?r - robot ?b - box)
+    :precondition ()
+    :effect ()
+  )
+  ;; prepare robot ?r loading box ?b and supply ?s
+  (:task load_task
+    :parameters (?r - robot ?b - box ?s - supply)
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b from robot ?r
+  (:task unload_box_task
+    :parameters (
+      ?r - robot
+      ?b - box
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b and its content ?v which it is a valve
+  (:task unload_valve_task
+    :parameters (
+      ?r - robot
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b and its content ?bo which it is a bolt
+  (:task unload_bolt_task
+    :parameters (
+      ?r - robot
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; unload the box ?b and its content ?t which it is a tool
+  (:task unload_tool_task
+    :parameters (
+      ?r - robot
+      ?w - workstation
+    )
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a valve to workstation ?w
+  (:task deliver_valve
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a bolt to workstation ?w
+  (:task deliver_bolt
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+  ;; deliver a tool to workstation ?w
+  (:task deliver_tool
+    :parameters (?w - workstation)
+    :precondition ()
+    :effect ()
+  )
+
+  ;; move robot ?r from location ?from to location ?to if they are connected
+  (:method m_go_to_direct_connection
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?from - location
+      ?to - location
+    )
+    :task (go_to ?r ?to)
+    :subtasks (and
+      (task0 (move_carrier ?r ?c ?from ?to))
+    )
+  )
+  ;; recursive method used if ?from and ?to are not connected
+  (:method m_go_to
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?from - location
+      ?to - location
+    )
+    :task (go_to ?r ?to)
+    :subtasks (and
+      (task0 (go_to ?r ?from))
+      (task1 (move_carrier ?r ?c ?from ?to))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; base method used if the robot is already at location
+  (:method m_go_to_trivial
+    :parameters (?r - robot ?l - location)
+    :task (go_to ?r ?l)
+    :subtasks (and
+      (task0 (noop ?r ?l))
+    )
+  )
+  ;; load supply ?s into box ?b
+  (:method m_load_supply_method
+    :parameters (
+      ?r - robot 
+      ?l - location 
+      ?b - box 
+      ?s - supply
+    )
+    :task (load_supply_task ?r ?b ?s)
+    :subtasks (and
+      task0 (load_supply ?r ?l ?b ?s)
+    )
+  )
+  ;; load box ?b onto robot ?r
+  (:method m_load_box_method
+    :parameters (
+      ?r - robot 
+      ?c - carrier 
+      ?b - box 
+      ?sp - space 
+      ?l - location
+    )
+    :task (load_box_task ?r ?b)
+    :subtasks (and
+      (task0 (load_carrier ?r ?c ?b ?sp ?l))
+    )
+  )
+  ;; load the box ?b with supply ?s and load robot ?r with box ?b
+  (:method m_load_method
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (load_supply_task ?r ?b ?s))
+      (task1 (load_box_task ?r ?b))
+    )
+    ;; NOTE: ordering is important since we can't load a box before filling it
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; load the box ?b, which is already on the robot, with supply ?s
+  (:method m_load_method_with_box
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (unload_box_task ?r ?b))
+      (task1 (load_supply_task ?r ?b ?s))
+      (task2 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+    )
+  )
+  ;; recursive verision of m_load_method (allows multiple boxes to be loaded onto a robot)
+  (:method m_load_method_recursive
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?sp - space
+      ?s - supply
+      ?l - location
+    )
+    :task (load_task ?r ?b ?s)
+    :subtasks (and
+      (task0 (load_task ?r ?b ?s))
+      (task1 (load_supply_task ?r ?b ?s))
+      (task2 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+    )
+  )
+  ;; unload box ?b from robot ?r
+  (:method m_unload_box
+    :parameters (
+      ?r - robot 
+      ?c - carrier 
+      ?b - box 
+      ?sp - space 
+      ?l - location
+    )
+    :task (unload_box_task ?r ?b)
+    :subtasks (and
+      (task0 (unload_carrier ?r ?c ?b ?sp ?l))
+    )
+  )
+  ;; unload box ?b from robot ?r and unload valve ?v from box ?b
+  (:method m_unload_valve
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?v - valve
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_valve_task ?r ?w)
+    :subtasks (and
+      (task0 (unload_box_task ?r ?b))
+      (task1 (unload_valve ?r ?b ?v ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload bolt ?bo from box ?b
+  (:method m_unload_bolt
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?bo - bolt
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_bolt_task ?r ?w)
+    :subtasks (and
+      (task0 (unload_box_task ?r ?b))
+      (task1 (unload_bolt ?r ?b ?bo ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; unload box ?b from robot ?r and unload tool ?t from box ?b
+  (:method m_unload_tool
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?l - location 
+    )
+    :task (unload_tool_task ?r ?w)
+    :subtasks (and
+      (task0 (unload_box_task ?r ?b))
+      (task1 (unload_tool ?r ?b ?t ?l ?w))
+    )
+    :ordering (and
+      (task0 < task1)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a valve
+  (:method m_deliver_valve
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?v - valve
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_valve ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?v))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_valve_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+      (task3 < task4)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a bolt
+  (:method m_deliver_bolt
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?bo - bolt
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_bolt ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?bo))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_bolt_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+      (task3 < task4)
+    )
+  )
+  ;; wrapper method that executes a full delivery of a tool
+  (:method m_deliver_tool
+    :parameters (
+      ?r - robot
+      ?c - carrier
+      ?b - box
+      ?s - space
+      ?t - tool
+      ?w - workstation
+      ?wh - location
+      ?l - location
+    )
+    :task (deliver_tool ?w)
+    :subtasks (and
+      (task0 (go_to ?r ?wh))
+      (task1 (load_task ?r ?b ?t))
+      (task2 (go_to ?r ?l))
+      (task3 (unload_tool_task ?r ?w))
+      (task4 (load_box_task ?r ?b))
+    )
+    :ordering (and
+      (task0 < task1)
+      (task1 < task2)
+      (task2 < task3)
+      (task3 < task4)
+    )
+  )
+
+  ;; Recursion termination
+  (:action noop
+    :parameters (?r - robot ?l - location)
+    :precondition (and 
+      (robot_at_loc ?r ?l)
+    )
+    :effect ()
+  )
+  ;; moves a robot with its carrier to a new location
+  (:action move_carrier
+    :parameters (?r - robot ?c - carrier ?from ?to - location)
+    :precondition (and
+      (connected ?from ?to)
+      (robot_at_loc ?r ?from)
+      (robot_has_carrier ?r ?c)
+    )
+    :effect (and
+      (not (robot_at_loc ?r ?from))
+      (robot_at_loc ?r ?to)
+    )
+  )
+  ;; loads the carrier of a robot with a box
+  (:action load_carrier
+    :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (box_at_loc ?b ?l)
+      (robot_has_carrier ?r ?c)
+      (free ?c ?s)
+    )
+    :effect (and
+      (not (box_at_loc ?b ?l))
+      (box_at_loc ?b ?c)
+      (not (free ?c ?s))
+      (occupied ?c ?s)
+    )
+  )
+  ;; unloads the carrier of a robot with a box
+  (:action unload_carrier
+    :parameters (?r - robot ?c - carrier ?b - box ?s - space ?l - location)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (box_at_loc ?b ?c)
+      (robot_has_carrier ?r ?c)
+      (occupied ?c ?s)
+    )
+    :effect (and
+      (box_at_loc ?b ?l)
+      (not (box_at_loc ?b ?c))
+      (free ?c ?s)
+      (not (occupied ?c ?s))
+    )
+  )
+  ;; loads an empty box with a supply
+  (:action load_supply
+    :parameters (?r - robot ?l - location ?b - box ?s - supply)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (box_at_loc ?b ?l)
+      (supply_at_loc ?s ?l)
+      (box_empty ?b)
+      (supply_available ?s)
+    )
+    :effect (and
+      (supply_in_box ?s ?b)
+      (not (box_empty ?b))
+      (box_full ?b)
+      (not (supply_at_loc ?s ?l))
+    )
+  )
+  ;; unloads the content of a box to a given workstation if it is a valve
+  (:action unload_valve
+    :parameters (?r - robot ?b - box ?valve - valve ?l - location ?w - workstation)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (supply_in_box ?valve ?b)
+      (box_at_loc ?b ?l)
+      (ws_at_loc ?w ?l)
+      (box_full ?b)
+      ;; (is_valve ?s)
+    )
+    :effect (and
+      (box_empty ?b)
+      (not (box_full ?b))
+      (supply_at_loc ?valve ?l)
+      ;; (ws_contains ?w ?valve)
+      (not (supply_in_box ?valve ?b))
+      (not (supply_available ?valve))
+      (has_valve ?w)
+    )
+  )
+  ;; unloads the content of a box to a given workstation if it is a bolt
+  (:action unload_bolt
+    :parameters (?r - robot ?b - box ?bolt - bolt ?l - location ?w - workstation)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (supply_in_box ?bolt ?b)
+      (box_at_loc ?b ?l)
+      (ws_at_loc ?w ?l)
+      (box_full ?b)
+      ;; (is_bolt ?bolt)
+    )
+    :effect (and
+      (box_empty ?b)
+      (not (box_full ?b))
+      (supply_at_loc ?bolt ?l)
+      ;; (ws_contains ?w ?bolt)
+      (not (supply_in_box ?bolt ?b))
+      (not (supply_available ?bolt))
+      (has_bolt ?w)
+    )
+  )
+  ;; unloads the content of a box to a given workstation if it is a tool
+  (:action unload_tool
+    :parameters (?r - robot ?b - box ?tool - tool ?l - location ?w - workstation)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (supply_in_box ?tool ?b)
+      (box_at_loc ?b ?l)
+      (ws_at_loc ?w ?l)
+      (box_full ?b)
+      ; (is_tool ?tool)
+    )
+    :effect (and
+      (box_empty ?b)
+      (not (box_full ?b))
+      (supply_at_loc ?tool ?l)
+      ;; (ws_contains ?w ?tool)
+      (not (supply_in_box ?tool ?b))
+      (not (supply_available ?tool))
+      (has_tool ?w)
+    )
+  )
+
+)
