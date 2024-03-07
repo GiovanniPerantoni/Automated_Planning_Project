@@ -1,9 +1,16 @@
 set instance robot1 robot
+set instance robot2 robot
+
 set instance warehouse_loc location
 set instance location1 location
 set instance location2 location
+set instance location3 location
+
 set instance workstation1 workstation
 set instance workstation2 workstation
+set instance workstation3 workstation
+set instance workstation4 workstation
+
 set instance box1 box
 set instance box2 box
 set instance box3 box
@@ -15,36 +22,63 @@ set instance bolt2 bolt
 set instance tool1 tool
 set instance tool2 tool
 set instance carrier1 carrier
+set instance carrier2 carrier
+
 set instance s1 space
 set instance s2 space
 set instance s3 space
 set instance s4 space
     
-set predicate (connected location1 location2)
-set predicate (connected location2 location1)
 set predicate (connected warehouse_loc location1)
 set predicate (connected location1 warehouse_loc)
 set predicate (connected warehouse_loc location2)
 set predicate (connected location2 warehouse_loc)
+set predicate (connected warehouse_loc location3)
+set predicate (connected location3 warehouse_loc)
+
+set predicate (connected location1 location2)
+set predicate (connected location2 location1)
+
+set predicate (connected location2 location3)
+set predicate (connected location3 location2)
+
+set predicate (connected location1 location3)
+set predicate (connected location3 location1)
+
 set predicate (ws_at_loc workstation1 location1)
-set predicate (ws_at_loc workstation2 location1)
+set predicate (ws_at_loc workstation2 location2)
+set predicate (ws_at_loc workstation3 location3)
+set predicate (ws_at_loc workstation4 location3)
+
 set predicate (robot_at_loc robot1 warehouse_loc)
+set predicate (robot_at_loc robot2 warehouse_loc)
+
 set predicate (robot_is_not_acting robot1)
+set predicate (robot_is_not_acting robot2)
+
 set predicate (robot_has_carrier robot1 carrier1)
+set predicate (robot_has_carrier robot2 carrier1)
+
 set predicate (free carrier1 s1)
 set predicate (free carrier1 s2)
+set predicate (free carrier1 s3)
+set predicate (free carrier1 s4)
+
 set predicate (box_at_loc box1 warehouse_loc)
 set predicate (box_at_loc box2 warehouse_loc)
 set predicate (box_at_loc box3 warehouse_loc)
+
 set predicate (box_empty box1)
 set predicate (box_empty box2)
 set predicate (box_empty box3)
+
 set predicate (supply_at_loc valve1 warehouse_loc)
 set predicate (supply_at_loc valve2 warehouse_loc)
 set predicate (supply_at_loc bolt1 warehouse_loc)
 set predicate (supply_at_loc bolt2 warehouse_loc)
 set predicate (supply_at_loc tool1 warehouse_loc)
 set predicate (supply_at_loc tool2 warehouse_loc)
+
 set predicate (supply_available valve1)
 set predicate (supply_available valve2)
 set predicate (supply_available bolt1)
@@ -52,4 +86,4 @@ set predicate (supply_available bolt2)
 set predicate (supply_available tool1)
 set predicate (supply_available tool2)
 
-set goal (and(robot_at_loc robot1 location2)(has_valve workstation1))
+set goal (and(has_valve workstation1)(has_valve workstation2)(has_tool workstation3)(has_bolt workstation3))
