@@ -4,9 +4,9 @@
 *.pdf
 exercise_3/PANDA.jar
 exercise_3/Domains
-ros_ws/build
-ros_ws/install
-ros_ws/log
-ros_ws/src/planner/.vscode/
+exercise_5/build
+exercise_5/install
+exercise_5/log
+exercise_5/src/planner/.vscode/
 .vscode/
 .vscode/*

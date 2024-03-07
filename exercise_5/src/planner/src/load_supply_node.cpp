@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
   auto node = std::make_shared<LoadSupply>();
   node->declare_parameter("duration", 1.0);
   node->duration = node->get_parameter("duration").as_double();
-  node->set_parameter(rclcpp::Parameter("action_name", "move_carrier"));
+  node->set_parameter(rclcpp::Parameter("action_name", "load_supply"));
   node->trigger_transition(
       lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
 

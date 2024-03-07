@@ -1,8 +1,0 @@
-      
-      (robot_at_loc robot2 warehouse_loc)
-      (has_valve workstation1)
-      (has_bolt workstation1)
-      (has_tool workstation1)
-      (has_valve workstation2)
-      (has_bolt workstation2)
-      (has_tool workstation2)
