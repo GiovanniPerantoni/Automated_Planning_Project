@@ -1,5 +1,5 @@
 (define
-  (problem problem3_0)
+  (problem problem3_2)
   (:domain logistic_planning_3)
 
   (:objects
