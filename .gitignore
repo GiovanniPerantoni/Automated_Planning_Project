@@ -1,6 +1,7 @@
 *.plan
 **/sas_plan
 *.sas
+*.pdf
 exercise_3/PANDA.jar
 exercise_3/Domains
 ros_ws/build
