@@ -10,9 +10,8 @@
     valve - supply ; type of supply
     bolt - supply ; type of supply
     tool - supply ; type of supply
-    )
+  )
 
-  ;(:constants)
 
   (:predicates
 
@@ -130,7 +129,6 @@
       (box_at_loc ?b ?l)
       (ws_at_loc ?w ?l)
       (box_full ?b)
-      ;; (is_valve ?s)
     )
     :effect (and
       (box_empty ?b)
@@ -152,7 +150,6 @@
       (box_at_loc ?b ?l)
       (ws_at_loc ?w ?l)
       (box_full ?b)
-      ;; (is_bolt ?bolt)
     )
     :effect (and
       (box_empty ?b)
@@ -174,7 +171,6 @@
       (box_at_loc ?b ?l)
       (ws_at_loc ?w ?l)
       (box_full ?b)
-      ; (is_tool ?tool)
     )
     :effect (and
       (box_empty ?b)
