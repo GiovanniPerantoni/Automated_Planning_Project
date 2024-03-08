@@ -3,7 +3,6 @@
 
   (:types
     location - object ; can contain workstations robots and boxes
-    warehouse - location ; contains supplies
     workstation - object ; can get boxes and contain supplies
     robot - object ; can pick up boxes, fill them, unload them and move between locations
     box - object ; can contain supplies
@@ -38,23 +37,10 @@
     (has_valve ?w - workstation) ; workstation ?w has a valve
     (has_bolt ?w - workstation) ; workstation ?w has a bolt
     (has_tool ?w - workstation) ; workstation ?w has a tool 
-    (supply_available ?s - supply) ; supply ?s is available
+    
     ;; supplies
+    (supply_available ?s - supply) ; supply ?s is available
     (supply_at_loc ?s - supply ?l - location) ; supply ?s is at location ?l
-  )
-
-  ;; moves a robot between two connected locations
-  (:action move
-    :parameters (?r - robot ?from ?to - location)
-    :precondition (and
-      (connected ?from ?to)
-      (robot_at_loc ?r ?from)
-      (robot_unloaded ?r)
-    )
-    :effect (and
-      (robot_at_loc ?r ?to)
-      (not (robot_at_loc ?r ?from))
-    )
   )
 
   ;; loads an empty robot with a box
@@ -70,6 +56,38 @@
       (robot_loaded ?r)
       (box_on_robot ?b ?r)
       (not (box_at_loc ?b ?l))
+    )
+  )
+
+  ;; loads an empty box with a supply
+  (:action load_supply
+    :parameters (?r - robot ?l - location ?b - box ?s - supply)
+    :precondition (and
+      (robot_at_loc ?r ?l)
+      (box_at_loc ?b ?l)
+      (supply_at_loc ?s ?l)
+      (box_empty ?b)
+      (supply_available ?s)
+    )
+    :effect (and
+      (supply_in_box ?s ?b)
+      (not (box_empty ?b))
+      (box_full ?b)
+      (not (supply_at_loc ?s ?l))
+    )
+  )
+
+  ;; moves a robot between two connected locations
+  (:action move
+    :parameters (?r - robot ?from ?to - location)
+    :precondition (and
+      (connected ?from ?to)
+      (robot_at_loc ?r ?from)
+      (robot_unloaded ?r)
+    )
+    :effect (and
+      (robot_at_loc ?r ?to)
+      (not (robot_at_loc ?r ?from))
     )
   )
 
@@ -103,25 +121,7 @@
     )
   )
 
-  ;; loads an empty box with a supply
-  (:action load_supply
-    :parameters (?r - robot ?l - location ?b - box ?s - supply)
-    :precondition (and
-      (robot_at_loc ?r ?l)
-      (box_at_loc ?b ?l)
-      (supply_at_loc ?s ?l)
-      (box_empty ?b)
-      (supply_available ?s)
-    )
-    :effect (and
-      (supply_in_box ?s ?b)
-      (not (box_empty ?b))
-      (box_full ?b)
-      (not (supply_at_loc ?s ?l))
-    )
-  )
-
-  ;; unloads the content of a box to a given workstation (:action unload_supply
+  ;; unloads the content of a box if it is a valve to a given workstation
   (:action unload_valve
     :parameters (?r - robot ?b - box ?valve - valve ?l - location ?w - workstation)
     :precondition (and
@@ -143,6 +143,7 @@
     )
   )
 
+  ;; unloads the content of a box if it is a bolt to a given workstation
   (:action unload_bolt
     :parameters (?r - robot ?b - box ?bolt - bolt ?l - location ?w - workstation)
     :precondition (and
@@ -163,6 +164,8 @@
       (has_bolt ?w)
     )
   )
+
+  ;; unloads the content of a box if it is a tool to a given workstation
   (:action unload_tool
     :parameters (?r - robot ?b - box ?tool - tool ?l - location ?w - workstation)
     :precondition (and
