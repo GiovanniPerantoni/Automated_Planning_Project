@@ -5,7 +5,6 @@
     robot1 - robot
     warehouse_loc location1 location2 - location
     workstation1 workstation2 workstation3 - workstation
-    warehouse1 - warehouse
     box1 box2 box3 - box
     valve1 valve2 - valve
     bolt1 bolt2 - bolt
