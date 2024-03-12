@@ -27,7 +27,6 @@
     (connected location4 location4)
     (connected location5 warehouse_loc)
     (connected location5 location4)
-
     ;; box location
     (box_at_loc box1 warehouse_loc)
     (box_at_loc box2 warehouse_loc)
@@ -81,23 +80,25 @@
     (supply_available tool4)
   )
 
-  (:goal (and
-    ;; robot final location
-    (robot_at_loc robot1 warehouse_loc)
-    (robot_at_loc robot2 warehouse_loc)
-    ;; valves
-    (has_valve workstation1)
-    (has_valve workstation2)
-    (has_valve workstation3)
-    (has_valve workstation5)
-    (has_valve workstation6)
-    ;; bolts
-    (has_bolt workstation2)
-    (has_bolt workstation3)
-    (has_bolt workstation4)
-    ;; tools
-    (has_tool workstation1)
-    (has_tool workstation3)
-    (has_tool workstation6)
-  ))
+  (:goal 
+    (and
+      ;; robot final location
+      (robot_at_loc robot1 warehouse_loc)
+      (robot_at_loc robot2 warehouse_loc)
+      ;; valves
+      (has_valve workstation1)
+      (has_valve workstation2)
+      (has_valve workstation3)
+      (has_valve workstation5)
+      (has_valve workstation6)
+      ;; bolts
+      (has_bolt workstation2)
+      (has_bolt workstation3)
+      (has_bolt workstation4)
+      ;; tools
+      (has_tool workstation1)
+      (has_tool workstation3)
+      (has_tool workstation6)
+    )
+  )
 )
