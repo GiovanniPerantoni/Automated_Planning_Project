@@ -5,7 +5,7 @@
     robot1 robot2 - robot
     warehouse_loc location1 location2 location3 - location
     workstation1 workstation2 workstation3 workstation4 - workstation
-    box1 box2 box3 box4 - box
+    box1 box2 box3 - box
     valve1 valve2 valve3 - valve
     bolt1 bolt2 bolt3 - bolt
     tool1 tool2 tool3 - tool
@@ -29,12 +29,10 @@
     (box_at_loc box1 warehouse_loc)
     (box_at_loc box2 warehouse_loc)
     (box_at_loc box3 warehouse_loc)
-    (box_at_loc box4 warehouse_loc)
     ;; box empty
     (box_empty box1)
     (box_empty box2)
     (box_empty box3)
-    (box_empty box4)
     ;; robot location
     (robot_at_loc robot1 warehouse_loc)
     (robot_at_loc robot2 warehouse_loc)
