@@ -35,6 +35,6 @@ ros2 run plansys2_terminal plansys2_terminal
 ```
 1. Source problem file (one between `problem_1`, `problem_2`)
 ```
-source <path_to_Automated_planning>/exercise_5/src/planner/pddl/simple_single_agent
+source <path_to_Automated_planning>/exercise_5/src/planner/pddl/problem_1
 ```
 Type `get plan` and then `run` to execute the plan.
