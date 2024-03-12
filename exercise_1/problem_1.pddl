@@ -3,7 +3,7 @@
 
   (:objects
     robot1 robot2 - robot
-    warehouse_loc location1 location2 location3 - location
+    warehouse_loc location1 location2 - location
     workstation1 workstation2 workstation3 - workstation
     box1 box2 box3 - box
     valve1 valve2 - valve
@@ -14,11 +14,11 @@
   (:init
     ;; graph edges
     (connected warehouse_loc location1)
+    (connected warehouse_loc location2)
     (connected location1 warehouse_loc)
     (connected location1 location2)
+    (connected location2 warehouse_loc)
     (connected location2 location1)
-    (connected location1 location3)
-    (connected location3 location1)
     ;; box location
     (box_at_loc box1 warehouse_loc)
     (box_at_loc box2 warehouse_loc)
@@ -34,9 +34,9 @@
     (robot_unloaded robot1)
     (robot_unloaded robot2)
     ; workstation location
-    (ws_at_loc workstation1 location2)
-    (ws_at_loc workstation2 location2)
-    (ws_at_loc workstation3 location3)
+    (ws_at_loc workstation1 location1)
+    (ws_at_loc workstation2 location1)
+    (ws_at_loc workstation3 location2)
     ;; supplies location
     (supply_at_loc valve1 warehouse_loc)
     (supply_at_loc valve2 warehouse_loc)
