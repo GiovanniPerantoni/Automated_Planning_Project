@@ -29,6 +29,13 @@
     (connected location4 location4)
     (connected location5 warehouse_loc)
     (connected location5 location4)
+    ;; workstations location
+    (ws_at_loc workstation1 location1)
+    (ws_at_loc workstation2 location1)
+    (ws_at_loc workstation3 location2)
+    (ws_at_loc workstation4 location3)
+    (ws_at_loc workstation5 location4)
+    (ws_at_loc workstation6 location5)
     ;; box location
     (box_at_loc box1 warehouse_loc)
     (box_at_loc box2 warehouse_loc)
@@ -48,13 +55,6 @@
     (free carrier1 s2)
     (free carrier1 s3)
     (free carrier2 s4)
-    ;; workstations location
-    (ws_at_loc workstation1 location1)
-    (ws_at_loc workstation2 location1)
-    (ws_at_loc workstation3 location2)
-    (ws_at_loc workstation4 location3)
-    (ws_at_loc workstation5 location4)
-    (ws_at_loc workstation6 location5)
     ;; supplies location
     (supply_at_loc valve1 warehouse_loc)
     (supply_at_loc valve2 warehouse_loc)
