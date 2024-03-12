@@ -64,4 +64,4 @@ set predicate (supply_available bolt2)
 set predicate (supply_available tool1)
 set predicate (supply_available tool2)
 
-set goal (and(robot_at_loc robot1 warehouse_loc)(robot_at_loc robot2 warehouse_loc)(has_valve workstation1)(has_bolt workstation1)(has_tool workstation1)(has_valve workstation2)(has_bolt workstation3)(has_tool workstation3))
+set goal (and(robot_at_loc robot1 warehouse_loc)(robot_at_loc robot2 warehouse_loc)(has_valve workstation1)(has_bolt workstation1))
