@@ -1,0 +1,71 @@
+
+ff: parsing domain file
+domain 'LOGISTIC_PLANNING_1' defined
+ ... done.
+ff: parsing problem file
+problem 'PROBLEM1_1' defined
+ ... done.
+
+
+
+Cueing down from goal distance:   14 into depth [1][2]
+                                  13            [1]
+                                  10            [1][2][3][4][5]
+                                   9            [1][2]
+
+Enforced Hill-climbing failed !
+switching to Best-first Search now.
+
+advancing to distance :   14
+                          11
+                          10
+                           9
+                           8
+                           7
+                           6
+                           5
+                           4
+                           3
+                           2
+                           1
+                           0
+
+ff: found legal plan as follows
+
+step    0: LOAD_ROBOT ROBOT2 BOX2 WAREHOUSE_LOC
+        1: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION1
+        2: LOAD_ROBOT ROBOT1 BOX3 WAREHOUSE_LOC
+        3: MOVE_BOX ROBOT2 BOX2 LOCATION1 WAREHOUSE_LOC
+        4: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 TOOL2
+        5: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION1
+        6: UNLOAD_TOOL ROBOT2 BOX2 TOOL2 LOCATION1 WORKSTATION1
+        7: MOVE_BOX ROBOT2 BOX2 LOCATION1 WAREHOUSE_LOC
+        8: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 TOOL1
+        9: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION2
+       10: UNLOAD_TOOL ROBOT2 BOX2 TOOL1 LOCATION2 WORKSTATION3
+       11: MOVE_BOX ROBOT2 BOX2 LOCATION2 WAREHOUSE_LOC
+       12: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 BOLT2
+       13: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION2
+       14: UNLOAD_BOLT ROBOT2 BOX2 BOLT2 LOCATION2 WORKSTATION3
+       15: MOVE_BOX ROBOT2 BOX2 LOCATION2 WAREHOUSE_LOC
+       16: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 BOLT1
+       17: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION1
+       18: UNLOAD_BOLT ROBOT2 BOX2 BOLT1 LOCATION1 WORKSTATION1
+       19: MOVE_BOX ROBOT2 BOX2 LOCATION1 WAREHOUSE_LOC
+       20: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 VALVE2
+       21: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION1
+       22: UNLOAD_VALVE ROBOT2 BOX2 VALVE2 LOCATION1 WORKSTATION1
+       23: MOVE_BOX ROBOT2 BOX2 LOCATION1 WAREHOUSE_LOC
+       24: LOAD_SUPPLY ROBOT2 WAREHOUSE_LOC BOX2 VALVE1
+       25: MOVE_BOX ROBOT2 BOX2 WAREHOUSE_LOC LOCATION1
+       26: UNLOAD_VALVE ROBOT2 BOX2 VALVE1 LOCATION1 WORKSTATION2
+       27: MOVE_BOX ROBOT2 BOX2 LOCATION1 WAREHOUSE_LOC
+     
+
+time spent:    0.00 seconds instantiating 288 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 100 facts and 288 actions
+               0.00 seconds creating final representation with 100 relevant facts
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 2184 states, to a max depth of 5
+               0.00 seconds total time
+
