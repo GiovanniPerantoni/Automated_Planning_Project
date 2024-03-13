@@ -1,5 +1,8 @@
-*.plan
-**/sas_plan
+# *.plan
+# **/*sas_plan
+# *.txt
+exercise_4/*.plan
+
 *.sas
 *.pdf
 exercise_3/PANDA.jar
