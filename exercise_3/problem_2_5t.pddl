@@ -22,14 +22,12 @@
       (task2 (deliver_tool workstation3))
       (task3 (deliver_valve workstation2))
       (task4 (deliver_bolt workstation1))
-    ;   (task5 (deliver_tool workstation1))
     )
     :ordering (and
       (task0 < task1)
       (task1 < task2)
       (task2 < task3)
       (task3 < task4)
-    ;   (task4 < task5)
     )
   )
 
