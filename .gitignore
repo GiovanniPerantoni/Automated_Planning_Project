@@ -7,6 +7,7 @@ exercise_4/*.plan
 *.pdf
 exercise_3/PANDA.jar
 exercise_3/Domains
+exercise_3/old_problems
 exercise_5/build
 exercise_5/install
 exercise_5/log
