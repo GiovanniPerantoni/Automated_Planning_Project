@@ -38,7 +38,7 @@ ament_target_dependencies(unload_tool_node ${dependencies})
 add_executable(unload_valve_node src/unload_valve_node.cpp)
 ament_target_dependencies(unload_valve_node ${dependencies})
 
-install(DIRECTORY launch pddl DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch pddl params DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
   load_carrier_node

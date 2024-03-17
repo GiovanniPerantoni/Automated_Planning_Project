@@ -43,7 +43,7 @@
     (robot_at_loc robot2 warehouse_loc)
     ;; robot occupation
     (robot_is_not_acting robot1)
-    (robot_is_not_acting robot2)
+    ;(robot_is_not_acting robot2)
     ;; carrier owner
     (robot_has_carrier robot1 carrier1)
     (robot_has_carrier robot2 carrier2)
