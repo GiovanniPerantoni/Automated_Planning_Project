@@ -37,6 +37,11 @@ ${TFD_HOME}/search/search y Y r O 1 C 1 < ./output
 ``` 
 
 ## Running Exercise 5
+1. Install dependency for plansys2
+```
+sudo apt-get install ros-humble-behaviortree-cpp
+```
+2. Setup TFD
 ```
 export TFD_HOME=<path_to_Automated_planning>/exercise_5/src/TemporalFastDownward/downward
 cd <path_to_Automated_planning>/exercise_5
@@ -45,7 +50,7 @@ cd <path_to_Automated_planning>/exercise_5
 ```
 ./src/TemporalFastDownward/build
 ```
-2. Build ros workspace
+1. Build ros workspace
 ```
 colcon build --symlink-install
 source install/setup.bash
