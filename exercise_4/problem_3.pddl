@@ -46,7 +46,7 @@
     (box_empty box3)
     ;; robot location
     (robot_at_loc robot1 warehouse_loc)
-    ;;(robot_at_loc robot2 warehouse_loc)
+    (robot_at_loc robot2 warehouse_loc)
     ;; robot occupation
     (robot_is_not_acting robot1)
     (robot_is_not_acting robot2)
@@ -94,12 +94,12 @@
     (and
       ;; robot final location
       (robot_at_loc robot1 warehouse_loc)
-      ;(robot_at_loc robot2 warehouse_loc)
+      (robot_at_loc robot2 warehouse_loc)
       ;; valves
-      ; (has_valve workstation1)
-      ; (has_valve workstation2)
-      ; (has_valve workstation3)
-      ; (has_valve workstation5)
+      (has_valve workstation1)
+      (has_valve workstation2)
+      (has_valve workstation3)
+      (has_valve workstation5)
       (has_valve workstation6)
       ;; bolts
       (has_bolt workstation2)
