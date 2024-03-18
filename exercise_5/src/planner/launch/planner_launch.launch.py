@@ -34,7 +34,7 @@ def generate_launch_description():
         launch_arguments={
             'model_file': example_dir + '/pddl/domain.pddl',
             'namespace': namespace,
-            # 'params_file': get_package_share_directory('planner')+ '/params/params.yaml',
+            'params_file': get_package_share_directory('planner')+ '/params/params.yaml',
         }.items())
 
     # Specify the actions for robot1
