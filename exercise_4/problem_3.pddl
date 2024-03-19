@@ -2,7 +2,7 @@
   (:domain logistic_planning_4)
 
   (:objects
-    robot1 robot2 - robot
+    cargo drone - robot
     warehouse_loc location1 location2 location3 location4 location5 - location
     workstation1 workstation2 workstation3 workstation4 workstation5 workstation6 - workstation
     box1 box2 box3 - box
@@ -26,7 +26,7 @@
     (connected location3 location2)
     (connected location3 location4)
     (connected location4 location3)
-    (connected location4 location4)
+    (connected location4 location5)
     (connected location5 warehouse_loc)
     (connected location5 location4)
     ;; workstations location
@@ -45,14 +45,14 @@
     (box_empty box2)
     (box_empty box3)
     ;; robot location
-    (robot_at_loc robot1 warehouse_loc)
-    (robot_at_loc robot2 warehouse_loc)
+    (robot_at_loc cargo warehouse_loc)
+    (robot_at_loc drone warehouse_loc)
     ;; robot occupation
-    (robot_is_not_acting robot1)
-    (robot_is_not_acting robot2)
+    (robot_is_not_acting cargo)
+    (robot_is_not_acting drone)
     ;; carrier owner
-    (robot_has_carrier robot1 carrier1)
-    (robot_has_carrier robot2 carrier2)
+    (robot_has_carrier cargo carrier1)
+    (robot_has_carrier drone carrier2)
     ;; carrier space
     (free carrier1 s1)
     (free carrier1 s2)
@@ -93,8 +93,8 @@
   (:goal
     (and
       ;; robot final location
-      (robot_at_loc robot1 warehouse_loc)
-      (robot_at_loc robot2 warehouse_loc)
+      (robot_at_loc cargo warehouse_loc)
+      (robot_at_loc drone warehouse_loc)
       ;; valves
       (has_valve workstation1)
       (has_valve workstation2)

@@ -48,7 +48,7 @@ cd <path_to_Automated_planning>/exercise_5
 ```
 1. Compile `tfd`
 ```
-./src/TemporalFastDownward/build
+cd src/TemporalFastDownward && ./build && cd ../..
 ```
 1. Build ros workspace
 ```

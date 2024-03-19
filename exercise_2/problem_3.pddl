@@ -26,7 +26,7 @@
     (connected location3 location2)
     (connected location3 location4)
     (connected location4 location3)
-    (connected location4 location4)
+    (connected location4 location5)
     (connected location5 warehouse_loc)
     (connected location5 location4)
     ;; workstations location

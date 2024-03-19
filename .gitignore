@@ -14,3 +14,6 @@ exercise_5/log
 exercise_5/src/planner/.vscode/
 .vscode/
 .vscode/*
+*.groups
+**/*sas_plan
+**/output
