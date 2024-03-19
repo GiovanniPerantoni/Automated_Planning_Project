@@ -1,8 +1,8 @@
-(define (problem problem4_2)
-  (:domain logistic_planning_4)
+(define (problem problem2_2)
+  (:domain logistic_planning_2)
 
   (:objects
-    robot1 robot2 - robot
+    cargo drone - robot
     warehouse_loc location1 location2 location3 - location
     workstation1 workstation2 workstation3 workstation4 - workstation
     box1 box2 box3 - box
@@ -39,14 +39,14 @@
     (box_empty box2)
     (box_empty box3)
     ;; robot location
-    (robot_at_loc robot1 warehouse_loc)
-    (robot_at_loc robot2 warehouse_loc)
-    ;; robot occupation
-    (robot_is_not_acting robot1)
-    ;(robot_is_not_acting robot2)
+    (robot_at_loc cargo drone)
+    (robot_at_loc drone warehouse_loc)
     ;; carrier owner
-    (robot_has_carrier robot1 carrier1)
-    (robot_has_carrier robot2 carrier2)
+    (robot_has_carrier cargo drone)
+    (robot_has_carrier drone carrier2)
+    ;; robot occupation
+    (robot_is_not_acting cargo)
+    (robot_is_not_acting drone)
     ;; carrier space
     (free carrier1 s1)
     (free carrier1 s2)
@@ -62,7 +62,7 @@
     (supply_at_loc tool1 warehouse_loc)
     (supply_at_loc tool2 warehouse_loc)
     (supply_at_loc tool3 warehouse_loc)
-    ;; supplies availability
+    ;; supplies availabity
     (supply_available valve1)
     (supply_available valve2)
     (supply_available valve3)
@@ -76,8 +76,8 @@
 
   (:goal
     (and
-      (robot_at_loc robot1 warehouse_loc)
-      (robot_at_loc robot2 warehouse_loc)
+      (robot_at_loc cargo drone)
+      (robot_at_loc drone warehouse_loc)
       (has_valve workstation1)
       (has_valve workstation3)
       (has_valve workstation4)
@@ -88,9 +88,5 @@
       (has_tool workstation3)
       (has_tool workstation4)
     )
-  )
-
-  (:metric minimize
-    (total-time)
   )
 )
