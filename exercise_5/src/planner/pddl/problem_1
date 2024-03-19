@@ -1,5 +1,5 @@
-set instance robot1 robot
-set instance robot2 robot
+set instance cargo robot
+set instance drone robot
 set instance warehouse_loc location
 set instance location1 location
 set instance location2 location
@@ -39,12 +39,12 @@ set predicate (box_empty box1)
 set predicate (box_empty box2)
 set predicate (box_empty box3)
 
-set predicate (robot_at_loc robot1 warehouse_loc)
-set predicate (robot_at_loc robot2 warehouse_loc)
-set predicate (robot_is_not_acting robot1)
-set predicate (robot_is_not_acting robot2)
-set predicate (robot_has_carrier robot1 carrier1)
-set predicate (robot_has_carrier robot2 carrier2)
+set predicate (robot_at_loc cargo warehouse_loc)
+set predicate (robot_at_loc drone warehouse_loc)
+set predicate (robot_is_not_acting cargo)
+set predicate (robot_is_not_acting drone)
+set predicate (robot_has_carrier cargo carrier1)
+set predicate (robot_has_carrier drone carrier2)
 set predicate (free carrier1 s1)
 set predicate (free carrier1 s2)
 set predicate (free carrier1 s3)
@@ -64,4 +64,4 @@ set predicate (supply_available bolt2)
 set predicate (supply_available tool1)
 set predicate (supply_available tool2)
 
-set goal (and (robot_at_loc robot1 warehouse_loc)(robot_at_loc robot2 warehouse_loc)(has_valve workstation1)(has_bolt workstation1)(has_tool workstation1)(has_valve workstation2)(has_bolt workstation3)(has_tool workstation3))
+set goal (and (robot_at_loc cargo warehouse_loc)(robot_at_loc drone warehouse_loc)(has_valve workstation1)(has_bolt workstation1)(has_tool workstation1)(has_valve workstation2)(has_bolt workstation3)(has_tool workstation3))

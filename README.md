@@ -4,7 +4,7 @@ Project done for the UniTn Automated Planning course held by Professor Marco Rov
 ## Running Exercise 1 and 2 problems
 ```
 planutils activate
-downward --alias lama-first domain_file problem_file
+downward --alias lama-first domain1.pddl problem_{1-2-3}.pddl
 ```
 or
 ```
@@ -17,25 +17,10 @@ java -jar ./PANDA.jar -parser hddl domain_file problem_file
 ```
 
 ## Running Exercise 4
-This requires the ros workspace of ex. 5 to be compiled.
-Scenarios are tested using `POPF` and `TFD` with `plansys2` planners
-
-- Run `popf` 
 ```
-cd <path_to_Automated_planning>/exercise_4/
+planutils activate
+tfd domain4.pddl problem_{1-2-3}.pddl
 ```
-```
-ros2 run popf popf domain4.pddl problem_{1-2-3}.pddl
-```
-- Run `tfd` manually (we followed [this](https://github.com/sea-bass/TemporalFastDownward/tree/master/example) README example)
-
-```
-export TFD_HOME=<path_to_Automated_planning>/exercise_5/src/TemporalFastDownward/downward
-${TFD_HOME}/translate/translate.py ./domain4.pddl ./problem_1.pddl
-${TFD_HOME}/preprocess/preprocess < output.sas
-${TFD_HOME}/search/search y Y r O 1 C 1 < ./output
-``` 
-
 ## Running Exercise 5
 1. Install dependency for plansys2
 ```

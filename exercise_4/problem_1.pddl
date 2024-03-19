@@ -1,5 +1,5 @@
-(define (problem problem2_1)
-  (:domain logistic_planning_2)
+(define (problem problem4_1)
+  (:domain logistic_planning_4)
 
   (:objects
     cargo drone - robot
@@ -74,5 +74,9 @@
       (has_bolt workstation3)
       (has_tool workstation3)
     )
+  )
+
+  (:metric minimize
+    (total-time)
   )
 )

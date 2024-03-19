@@ -1,0 +1,371 @@
+Parsing...
+Contains quantified condition(s): False
+Instantiating...
+Trivial rules: Converted to facts.
+Starting instantiation [127 rules]...
+Finding invariants...
+Finding invariants... 32 initial candidates
+[0.000s CPU, 0.006s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups...
+Choosing groups...
+126 uncovered facts (before using the results from the invariant synthesis)
+126 uncovered facts
+Building translation key...
+Building STRIPS to SAS dictionary...
+Translating task...
+Processing axioms...
+Found 0 axioms that are always true and 0 that are always false
+constrained 548 conditions
+Writing output...
+Done!
+contains_quantified_conditions: 0
+Building causal graph...
+The causal graph is not acyclic.
+129 variables of 129 necessary
+548 of 548 operators necessary.
+0 of 0 Axiom_relational rules necessary.
+0 of 0 Axiom_functional rules necessary.
+Building domain transition graphs...
+solveable in poly time 0
+Building successor generator...
+all_operator_indices.size(): 548
+Writing output...
+printing SG 
+129
+done
+
+
+Planner Paramters:
+Anytime Search: Disabled
+Timeout if plan was found: 0 seconds (no timeout)
+Timeout while no plan was found: 0 seconds (no timeout)
+Greedy Search: Disabled
+Verbose: Enabled
+Lazy Heuristic Evaluation: Enabled
+Use caching in heuristic.
+Cyclic CG heuristic: Enabled 	Preferred Operators: Enabled
+Makespan heuristic: Disabled 	Preferred Operators: Disabled
+No Heuristic: Disabled
+Cg Heuristic Zero Cost Waiting Transitions: Enabled
+Cg Heuristic Fire Waiting Transitions Only If Local Problems Matches State: Disabled
+PrefOpsOrderedMode: Enabled with 1 goals
+PrefOpsCheapestMode: Enabled with 1 goals
+PrefOpsMostExpensiveMode: Disabled with 1000 goals
+PrefOpsRandMode: Disabled with 1000 goals
+PrefOpsConcurrentMode: Disabled
+Reset after solution was found: Enabled
+Reward only preferred operators queue: Disabled
+GValues by: Timestamp
+Queue management mode: Priority based
+Known by logical state only filtering: Disabled
+use_subgoals_to_break_makespan_ties: Disabled
+Reschedule plans: Enabled
+Epsilonize internally: Enabled
+Epsilonize externally: Disabled
+Keep original plans: Enabled
+Plan name: "./output_plan"
+Plan monitor file: "" (no monitoring)
+Monitoring verify timestamps: Disabled
+
+Contains universal conditions: 0
+Giving prior boost to open list 0
+INIT
+Open list sizes (priorities): 0 (-5000),  0 (0),  0 (0),  0 (0), 
+Initializing cyclic causal graph heuristic...done.
+Best heuristic values of queues: 171/-1/-1/-1 [expanded 1 state(s)]
+Best heuristic values of queues: 153.98/-1/-1/-1 [expanded 2 state(s)]
+Best heuristic values of queues: 130.98/-1/-1/-1 [expanded 3 state(s)]
+Best heuristic values of queues: 109.98/-1/-1/-1 [expanded 5 state(s)]
+Best heuristic values of queues: 103.98/-1/-1/-1 [expanded 55 state(s)]
+Best heuristic values of queues: 101/-1/-1/-1 [expanded 242 state(s)]
+Best heuristic values of queues: 99.98/-1/-1/-1 [expanded 341 state(s)]
+Best heuristic values of queues: 91.98/-1/-1/-1 [expanded 493 state(s)]
+Best heuristic values of queues: 87.98/-1/-1/-1 [expanded 1726 state(s)]
+Best heuristic values of queues: 86.98/-1/-1/-1 [expanded 2335 state(s)]
+Best heuristic values of queues: 76.98/-1/-1/-1 [expanded 2535 state(s)]
+Best heuristic values of queues: 69.98/-1/-1/-1 [expanded 2540 state(s)]
+Best heuristic values of queues: 65.98/-1/-1/-1 [expanded 2730 state(s)]
+Best heuristic values of queues: 65/-1/-1/-1 [expanded 3054 state(s)]
+Best heuristic values of queues: 59.98/-1/-1/-1 [expanded 4504 state(s)]
+Best heuristic values of queues: 57.99/-1/-1/-1 [expanded 4505 state(s)]
+Best heuristic values of queues: 56.98/-1/-1/-1 [expanded 4521 state(s)]
+Best heuristic values of queues: 56.98/-1/-1/-1 [expanded 4523 state(s)]
+Best heuristic values of queues: 55.98/-1/-1/-1 [expanded 4563 state(s)]
+Best heuristic values of queues: 51.98/-1/-1/-1 [expanded 4761 state(s)]
+Best heuristic values of queues: 48.98/-1/-1/-1 [expanded 4904 state(s)]
+Best heuristic values of queues: 46.96/-1/-1/-1 [expanded 5022 state(s)]
+Best heuristic values of queues: 40.98/-1/-1/-1 [expanded 5034 state(s)]
+Best heuristic values of queues: 37.98/-1/-1/-1 [expanded 5052 state(s)]
+Best heuristic values of queues: 29.98/-1/-1/-1 [expanded 5057 state(s)]
+Best heuristic values of queues: 26.98/-1/-1/-1 [expanded 5372 state(s)]
+Best heuristic values of queues: 22/-1/-1/-1 [expanded 5442 state(s)]
+Best heuristic values of queues: 21.98/-1/-1/-1 [expanded 5443 state(s)]
+Best heuristic values of queues: 21/-1/-1/-1 [expanded 5997 state(s)]
+Best heuristic values of queues: 20.98/-1/-1/-1 [expanded 5998 state(s)]
+Best heuristic values of queues: 20/-1/-1/-1 [expanded 6255 state(s)]
+Best heuristic values of queues: 16.98/-1/-1/-1 [expanded 8952 state(s)]
+Best heuristic values of queues: 15.98/-1/-1/-1 [expanded 8960 state(s)]
+Best heuristic values of queues: 12.98/-1/-1/-1 [expanded 10939 state(s)]
+Best heuristic values of queues: 8/-1/-1/-1 [expanded 10940 state(s)]
+Best heuristic values of queues: 7.98/-1/-1/-1 [expanded 10941 state(s)]
+Best heuristic values of queues: 7/-1/-1/-1 [expanded 10942 state(s)]
+Best heuristic values of queues: 6.98/-1/-1/-1 [expanded 10943 state(s)]
+Best heuristic values of queues: 5/-1/-1/-1 [expanded 10944 state(s)]
+Best heuristic values of queues: 0/-1/-1/-1 [expanded 10946 state(s)]
+New solution has been found.
+
+Found new plan:
+0.00000000: (load_supply drone warehouse_loc box1 bolt1) [2.00000000]
+2.01000000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+3.02000000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+8.03000000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+9.04000000: (unload_bolt cargo box1 bolt1 location1 workstation2) [2.00000000]
+11.05000000: (load_supply drone warehouse_loc box2 valve3) [2.00000000]
+13.06000000: (load_carrier drone carrier2 box2 s4 warehouse_loc) [1.00000000]
+14.07000000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+19.08000000: (unload_carrier drone carrier2 box2 s4 location2) [1.00000000]
+20.09000000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+25.10000000: (load_supply drone warehouse_loc box3 valve2) [2.00000000]
+27.11000000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+28.12000000: (move_carrier drone carrier2 warehouse_loc location1) [5.00000000]
+28.13000000: (move_carrier cargo carrier1 location1 location2) [5.00000000]
+33.14000000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+38.15000000: (unload_carrier drone carrier2 box3 s4 location1) [1.00000000]
+39.16000000: (load_carrier drone carrier2 box1 s4 location1) [1.00000000]
+40.17000000: (move_carrier drone carrier2 location1 warehouse_loc) [5.00000000]
+45.18000000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+46.19000000: (load_supply cargo warehouse_loc box1 bolt2) [2.00000000]
+48.20000000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+49.21000000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+54.22000000: (unload_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+55.23000000: (unload_bolt cargo box1 bolt2 location2 workstation3) [2.00000000]
+57.24000000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+57.25000000: (load_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+58.26000000: (load_carrier cargo carrier1 box2 s1 location2) [1.00000000]
+59.27000000: (move_carrier cargo carrier1 location2 location1) [5.00000000]
+62.25000000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+64.28000000: (move_carrier cargo carrier1 location1 location3) [5.00000000]
+69.29000000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+70.30000000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+75.31000000: (unload_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+76.32000000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+76.33000000: (load_supply cargo warehouse_loc box1 bolt3) [2.00000000]
+77.33000000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+82.34000000: (unload_carrier drone carrier2 box1 s4 location3) [1.00000000]
+83.35000000: (unload_bolt drone box1 bolt3 location3 workstation4) [2.00000000]
+85.36000000: (load_carrier drone carrier2 box1 s4 location3) [1.00000000]
+86.37000000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+91.38000000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+92.39000000: (load_supply cargo warehouse_loc box1 tool2) [2.00000000]
+94.40000000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+95.41000000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+100.42000000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+101.43000000: (unload_tool cargo box1 tool2 location1 workstation2) [2.00000000]
+103.44000000: (load_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+104.45000000: (load_carrier cargo carrier1 box3 s1 location1) [1.00000000]
+105.46000000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]
+110.47000000: (unload_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+111.48000000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+111.49000000: (load_supply drone warehouse_loc box1 valve1) [2.00000000]
+116.49000000: (unload_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+117.50000000: (unload_valve cargo box3 valve2 location2 workstation3) [2.00000000]
+119.51000000: (load_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+120.52000000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+125.53000000: (unload_carrier cargo carrier1 box3 s3 warehouse_loc) [1.00000000]
+126.54000000: (load_supply cargo warehouse_loc box3 tool1) [2.00000000]
+126.55000000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+127.56000000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+132.57000000: (unload_carrier drone carrier2 box3 s4 location2) [1.00000000]
+133.58000000: (unload_tool drone box3 tool1 location2 workstation3) [2.00000000]
+135.59000000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+140.60000000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+140.61000000: (load_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+141.62000000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+142.63000000: (unload_valve cargo box2 valve3 location3 workstation4) [2.00000000]
+145.61000000: (load_carrier cargo carrier1 box2 s3 location3) [1.00000000]
+146.62000000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+151.63000000: (unload_carrier cargo carrier1 box2 s3 warehouse_loc) [1.00000000]
+152.64000000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+152.65000000: (load_supply cargo warehouse_loc box2 tool3) [2.00000000]
+154.66000000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+155.67000000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+156.68000000: (load_carrier cargo carrier1 box2 s1 warehouse_loc) [1.00000000]
+157.69000000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+162.70000000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+163.71000000: (unload_tool cargo box2 tool3 location3 workstation4) [2.00000000]
+165.72000000: (move_carrier cargo carrier1 location3 location1) [5.00000000]
+170.73000000: (unload_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+171.74000000: (unload_valve cargo box1 valve1 location1 workstation1) [2.00000000]
+173.75000000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]
+Rescheduled Plan:
+0.00100000: (load_supply drone warehouse_loc box1 bolt1) [2.00000000]
+0.00200000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+1.01200000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+6.02200000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+7.03200000: (unload_bolt cargo box1 bolt1 location1 workstation2) [2.00000000]
+2.01200000: (load_supply drone warehouse_loc box2 valve3) [2.00000000]
+4.02200000: (load_carrier drone carrier2 box2 s4 warehouse_loc) [1.00000000]
+5.03200000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+10.04200000: (unload_carrier drone carrier2 box2 s4 location2) [1.00000000]
+11.05200000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+16.06200000: (load_supply drone warehouse_loc box3 valve2) [2.00000000]
+18.07200000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+19.08200000: (move_carrier drone carrier2 warehouse_loc location1) [5.00000000]
+19.09200000: (move_carrier cargo carrier1 location1 location2) [5.00000000]
+24.10200000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+24.10300000: (unload_carrier drone carrier2 box3 s4 location1) [1.00000000]
+25.11300000: (load_carrier drone carrier2 box1 s4 location1) [1.00000000]
+26.12300000: (move_carrier drone carrier2 location1 warehouse_loc) [5.00000000]
+31.13300000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+32.14300000: (load_supply cargo warehouse_loc box1 bolt2) [2.00000000]
+34.15400000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+35.16400000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+40.17400000: (unload_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+41.18400000: (unload_bolt cargo box1 bolt2 location2 workstation3) [2.00000000]
+32.14400000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+43.19400000: (load_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+44.20400000: (load_carrier cargo carrier1 box2 s1 location2) [1.00000000]
+45.21400000: (move_carrier cargo carrier1 location2 location1) [5.00000000]
+37.15400000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+50.22400000: (move_carrier cargo carrier1 location1 location3) [5.00000000]
+55.23400000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+56.24400000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+61.25400000: (unload_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+62.26400000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+62.26500000: (load_supply cargo warehouse_loc box1 bolt3) [2.00000000]
+63.27500000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+68.28500000: (unload_carrier drone carrier2 box1 s4 location3) [1.00000000]
+69.29500000: (unload_bolt drone box1 bolt3 location3 workstation4) [2.00000000]
+71.30500000: (load_carrier drone carrier2 box1 s4 location3) [1.00000000]
+72.31500000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+77.32500000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+78.33500000: (load_supply cargo warehouse_loc box1 tool2) [2.00000000]
+80.34500000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+81.35500000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+86.36500000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+87.37500000: (unload_tool cargo box1 tool2 location1 workstation2) [2.00000000]
+89.38500000: (load_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+90.39500000: (load_carrier cargo carrier1 box3 s1 location1) [1.00000000]
+91.40500000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]
+96.41500000: (unload_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+97.42500000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+97.42600000: (load_supply drone warehouse_loc box1 valve1) [2.00000000]
+102.43600000: (unload_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+103.44600000: (unload_valve cargo box3 valve2 location2 workstation3) [2.00000000]
+105.45600000: (load_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+106.46600000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+111.47600000: (unload_carrier cargo carrier1 box3 s3 warehouse_loc) [1.00000000]
+112.48600000: (load_supply cargo warehouse_loc box3 tool1) [2.00000000]
+112.48700000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+113.49700000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+118.50700000: (unload_carrier drone carrier2 box3 s4 location2) [1.00000000]
+119.51700000: (unload_tool drone box3 tool1 location2 workstation3) [2.00000000]
+114.49700000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+121.52700000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+119.50700000: (load_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+120.51700000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+121.52800000: (unload_valve cargo box2 valve3 location3 workstation4) [2.00000000]
+123.53800000: (load_carrier cargo carrier1 box2 s3 location3) [1.00000000]
+124.54800000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+129.55800000: (unload_carrier cargo carrier1 box2 s3 warehouse_loc) [1.00000000]
+126.53800000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+130.56800000: (load_supply cargo warehouse_loc box2 tool3) [2.00000000]
+127.54800000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+132.57800000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+133.58800000: (load_carrier cargo carrier1 box2 s1 warehouse_loc) [1.00000000]
+134.59800000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+139.60800000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+140.61800000: (unload_tool cargo box2 tool3 location3 workstation4) [2.00000000]
+142.62800000: (move_carrier cargo carrier1 location3 location1) [5.00000000]
+147.63800000: (unload_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+148.64800000: (unload_valve cargo box1 valve1 location1 workstation1) [2.00000000]
+150.65800000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]
+Solution with original makespan 178.75 found (ignoring no-moving-targets-rule).
+Plan length: 82 step(s).
+Makespan   : 155.658
+Rescheduled Makespan   : 155.658
+Search time: 1.83 seconds - Walltime: 1.87963 seconds
+Total time: 1.83 seconds - Walltime: 1.89044 seconds
+0.00100000: (load_supply drone warehouse_loc box1 bolt1) [2.00000000]
+0.00200000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+1.01200000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+6.02200000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+7.03200000: (unload_bolt cargo box1 bolt1 location1 workstation2) [2.00000000]
+2.01200000: (load_supply drone warehouse_loc box2 valve3) [2.00000000]
+4.02200000: (load_carrier drone carrier2 box2 s4 warehouse_loc) [1.00000000]
+5.03200000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+10.04200000: (unload_carrier drone carrier2 box2 s4 location2) [1.00000000]
+11.05200000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+16.06200000: (load_supply drone warehouse_loc box3 valve2) [2.00000000]
+18.07200000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+19.08200000: (move_carrier drone carrier2 warehouse_loc location1) [5.00000000]
+19.09200000: (move_carrier cargo carrier1 location1 location2) [5.00000000]
+24.10200000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+24.10300000: (unload_carrier drone carrier2 box3 s4 location1) [1.00000000]
+25.11300000: (load_carrier drone carrier2 box1 s4 location1) [1.00000000]
+26.12300000: (move_carrier drone carrier2 location1 warehouse_loc) [5.00000000]
+31.13300000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+32.14300000: (load_supply cargo warehouse_loc box1 bolt2) [2.00000000]
+34.15400000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+35.16400000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+40.17400000: (unload_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+41.18400000: (unload_bolt cargo box1 bolt2 location2 workstation3) [2.00000000]
+32.14400000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+43.19400000: (load_carrier cargo carrier1 box1 s3 location2) [1.00000000]
+44.20400000: (load_carrier cargo carrier1 box2 s1 location2) [1.00000000]
+45.21400000: (move_carrier cargo carrier1 location2 location1) [5.00000000]
+37.15400000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+50.22400000: (move_carrier cargo carrier1 location1 location3) [5.00000000]
+55.23400000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+56.24400000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+61.25400000: (unload_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+62.26400000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+62.26500000: (load_supply cargo warehouse_loc box1 bolt3) [2.00000000]
+63.27500000: (move_carrier drone carrier2 warehouse_loc location3) [5.00000000]
+68.28500000: (unload_carrier drone carrier2 box1 s4 location3) [1.00000000]
+69.29500000: (unload_bolt drone box1 bolt3 location3 workstation4) [2.00000000]
+71.30500000: (load_carrier drone carrier2 box1 s4 location3) [1.00000000]
+72.31500000: (move_carrier drone carrier2 location3 warehouse_loc) [5.00000000]
+77.32500000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+78.33500000: (load_supply cargo warehouse_loc box1 tool2) [2.00000000]
+80.34500000: (load_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+81.35500000: (move_carrier cargo carrier1 warehouse_loc location1) [5.00000000]
+86.36500000: (unload_carrier cargo carrier1 box1 s1 location1) [1.00000000]
+87.37500000: (unload_tool cargo box1 tool2 location1 workstation2) [2.00000000]
+89.38500000: (load_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+90.39500000: (load_carrier cargo carrier1 box3 s1 location1) [1.00000000]
+91.40500000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]
+96.41500000: (unload_carrier cargo carrier1 box1 s1 warehouse_loc) [1.00000000]
+97.42500000: (move_carrier cargo carrier1 warehouse_loc location2) [5.00000000]
+97.42600000: (load_supply drone warehouse_loc box1 valve1) [2.00000000]
+102.43600000: (unload_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+103.44600000: (unload_valve cargo box3 valve2 location2 workstation3) [2.00000000]
+105.45600000: (load_carrier cargo carrier1 box3 s3 location2) [1.00000000]
+106.46600000: (move_carrier cargo carrier1 location2 warehouse_loc) [5.00000000]
+111.47600000: (unload_carrier cargo carrier1 box3 s3 warehouse_loc) [1.00000000]
+112.48600000: (load_supply cargo warehouse_loc box3 tool1) [2.00000000]
+112.48700000: (load_carrier drone carrier2 box3 s4 warehouse_loc) [1.00000000]
+113.49700000: (move_carrier drone carrier2 warehouse_loc location2) [5.00000000]
+118.50700000: (unload_carrier drone carrier2 box3 s4 location2) [1.00000000]
+119.51700000: (unload_tool drone box3 tool1 location2 workstation3) [2.00000000]
+114.49700000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+121.52700000: (move_carrier drone carrier2 location2 warehouse_loc) [5.00000000]
+119.50700000: (load_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+120.51700000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+121.52800000: (unload_valve cargo box2 valve3 location3 workstation4) [2.00000000]
+123.53800000: (load_carrier cargo carrier1 box2 s3 location3) [1.00000000]
+124.54800000: (move_carrier cargo carrier1 location3 warehouse_loc) [5.00000000]
+129.55800000: (unload_carrier cargo carrier1 box2 s3 warehouse_loc) [1.00000000]
+126.53800000: (load_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+130.56800000: (load_supply cargo warehouse_loc box2 tool3) [2.00000000]
+127.54800000: (unload_carrier drone carrier2 box1 s4 warehouse_loc) [1.00000000]
+132.57800000: (load_carrier cargo carrier1 box1 s3 warehouse_loc) [1.00000000]
+133.58800000: (load_carrier cargo carrier1 box2 s1 warehouse_loc) [1.00000000]
+134.59800000: (move_carrier cargo carrier1 warehouse_loc location3) [5.00000000]
+139.60800000: (unload_carrier cargo carrier1 box2 s1 location3) [1.00000000]
+140.61800000: (unload_tool cargo box2 tool3 location3 workstation4) [2.00000000]
+142.62800000: (move_carrier cargo carrier1 location3 location1) [5.00000000]
+147.63800000: (unload_carrier cargo carrier1 box1 s3 location1) [1.00000000]
+148.64800000: (unload_valve cargo box1 valve1 location1 workstation1) [2.00000000]
+150.65800000: (move_carrier cargo carrier1 location1 warehouse_loc) [5.00000000]

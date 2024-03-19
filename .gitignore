@@ -17,3 +17,4 @@ exercise_5/src/planner/.vscode/
 *.groups
 **/*sas_plan
 **/output
+**/*__pycache__*

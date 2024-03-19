@@ -7,6 +7,8 @@ RUN planutils install -y downward
 RUN planutils install -y ff
 RUN planutils install -y optic
 RUN planutils install -y tfd
+RUN planutils install -y popf
+
 
 RUN apt-get update
 RUN apt-get install -y openjdk-21-jre openjdk-21-jre-headless

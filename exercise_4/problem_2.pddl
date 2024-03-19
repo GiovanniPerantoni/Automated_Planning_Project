@@ -1,5 +1,5 @@
-(define (problem problem2_2)
-  (:domain logistic_planning_2)
+(define (problem problem4_2)
+  (:domain logistic_planning_4)
 
   (:objects
     cargo drone - robot
@@ -39,10 +39,10 @@
     (box_empty box2)
     (box_empty box3)
     ;; robot location
-    (robot_at_loc cargo drone)
+    (robot_at_loc cargo warehouse_loc)
     (robot_at_loc drone warehouse_loc)
     ;; carrier owner
-    (robot_has_carrier cargo drone)
+    (robot_has_carrier cargo carrier1)
     (robot_has_carrier drone carrier2)
     ;; robot occupation
     (robot_is_not_acting cargo)
@@ -76,7 +76,7 @@
 
   (:goal
     (and
-      (robot_at_loc cargo drone)
+      (robot_at_loc cargo warehouse_loc)
       (robot_at_loc drone warehouse_loc)
       (has_valve workstation1)
       (has_valve workstation3)
@@ -88,5 +88,9 @@
       (has_tool workstation3)
       (has_tool workstation4)
     )
+  )
+  
+  (:metric minimize
+    (total-time)
   )
 )
