@@ -2,7 +2,7 @@
   (:domain logistic_planning_1)
 
   (:objects
-    robot1 robot2 - robot
+    cargo - robot
     warehouse_loc location1 location2 location3 location4 location5 - location
     workstation1 workstation2 workstation3 workstation4 workstation5 workstation6 - workstation
     box1 box2 box3 - box
@@ -24,7 +24,7 @@
     (connected location3 location2)
     (connected location3 location4)
     (connected location4 location3)
-    (connected location4 location4)
+    (connected location4 location5)
     (connected location5 warehouse_loc)
     (connected location5 location4)
     ;; box location
@@ -36,11 +36,9 @@
     (box_empty box2)
     (box_empty box3)
     ;; robot location
-    (robot_at_loc robot1 warehouse_loc)
-    (robot_at_loc robot2 warehouse_loc)
+    (robot_at_loc cargo warehouse_loc)
     ;; robot unloaded
-    (robot_unloaded robot1)
-    (robot_unloaded robot2)
+    (robot_unloaded cargo)
     ;; workstation location
     (ws_at_loc workstation1 location1)
     (ws_at_loc workstation2 location1)
@@ -83,8 +81,7 @@
   (:goal 
     (and
       ;; robot final location
-      (robot_at_loc robot1 warehouse_loc)
-      (robot_at_loc robot2 warehouse_loc)
+      (robot_at_loc cargo warehouse_loc)
       ;; valves
       (has_valve workstation1)
       (has_valve workstation2)
