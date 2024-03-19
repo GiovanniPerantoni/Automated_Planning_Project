@@ -39,10 +39,10 @@
     (box_empty box2)
     (box_empty box3)
     ;; robot location
-    (robot_at_loc cargo drone)
+    (robot_at_loc cargo warehouse_loc)
     (robot_at_loc drone warehouse_loc)
     ;; carrier owner
-    (robot_has_carrier cargo drone)
+    (robot_has_carrier cargo carrier1)
     (robot_has_carrier drone carrier2)
     ;; carrier space
     (free carrier1 s1)
@@ -73,7 +73,7 @@
 
   (:goal
     (and
-      (robot_at_loc cargo drone)
+      (robot_at_loc cargo warehouse_loc)
       (robot_at_loc drone warehouse_loc)
       (has_valve workstation1)
       (has_valve workstation3)
